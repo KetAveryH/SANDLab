@@ -1,0 +1,50 @@
+# General
+.DS_Store
+Thumbs.db
+
+# ESP-IDF specific
+build/
+sdkconfig
+sdkconfig.old
+*.log
+
+# Compiled object files
+*.o
+*.obj
+*.elf
+*.map
+*.bin
+*.d
+*.ld
+*.a
+
+# Logs
+*.log
+*.log.*
+
+# VSCode and other editor-specific settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Python virtual environment
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+
+# CMake specific
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# ESP-IDF specific Python dependencies
+esp-idf/.espressif/
+esp-idf/components/esptool_py/esptool/*.pyc
+esp-idf/components/*/components/*
+esp-idf/examples/*/build/
+esp-idf/examples/*/components/*/build/
