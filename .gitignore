@@ -1,6 +1,7 @@
 # General
 .DS_Store
 Thumbs.db
+*config.h
 
 # ESP-IDF specific
 build/
@@ -48,3 +49,4 @@ esp-idf/components/esptool_py/esptool/*.pyc
 esp-idf/components/*/components/*
 esp-idf/examples/*/build/
 esp-idf/examples/*/components/*/build/
+
