@@ -58,7 +58,7 @@ void app_main(void)
     time(&now);
     localtime_r(&now, &timeinfo);
     // Is time set? If not, tm_year will be (1970 - 1900).
-    if (timeinfo.tm_year < (2016 - 1900)) {
+    if (timeinfo.tm_year < (2024 - 1900)) {
         ESP_LOGI(TAG, "Time is not set yet. Connecting to WiFi and getting time over NTP.");
         obtain_time();
         // update 'now' variable with current time

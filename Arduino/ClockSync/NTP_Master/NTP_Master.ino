@@ -38,5 +38,5 @@ void loop() {
     client.print(currentTime);
     client.stop();
   }
-  delay(1000); // Synchronize every second
+  delay(150); // Synchronize every second
 }
