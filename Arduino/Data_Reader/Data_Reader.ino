@@ -15,12 +15,16 @@
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", 0, 60000);
 Adafruit_INA219 ina219(0x40);
+HardwareSerial SerialPort(1); // Creates an instance for UART1
+const int signalPin = 14;
 
 
 
 void setup() {
-
+  SerialPort.begin(115200, SERIAL_8N1, 47, 21); // Initializes UART1 with custom TX (GPIO10) and RX (GPIO9) pins
   // SD_MMC INITIALIZATION
+
+  pinMode(signalPin, INPUT);
 
   SD_MMC.setPins(SD_MMC_CLK, SD_MMC_CMD, SD_MMC_D0);
     if (!SD_MMC.begin("/sdcard", true, true, SDMMC_FREQ_DEFAULT, 5)) {
@@ -64,11 +68,23 @@ void setup() {
 
   timeClient.begin();
   deleteFile(SD_MMC, "/data.csv"); // TEMPORARY
-  writeFile(SD_MMC, "/data.csv", "Time, Bus Voltage, Shunt Voltage, Load Voltage, Current_mA, Power_mA \n");
+  writeFile(SD_MMC, "/data.csv", "Time, Bus Voltage, Shunt Voltage, Load Voltage, Current_mA, Power_mA, Events, dataReceived\n");
 
 }
 
 void loop() {
+  String eventData = "";
+
+  if (SerialPort.available() > 0) {
+    String receivedData = SerialPort.readStringUntil('\n');
+    eventData += receivedData;
+    Serial.print("Received on UART1: ");
+    Serial.println(receivedData);
+  }
+
+  int signalState = digitalRead(signalPin);
+  Serial.print(signalState);
+
   float shuntvoltage = 0;
   float busvoltage = 0;
   float current_mA = 0;
@@ -77,7 +93,7 @@ void loop() {
 
   timeClient.update();
   String currentTime = timeClient.getFormattedTime();
-  Serial.println(currentTime);
+  // Serial.println(currentTime);
 
   shuntvoltage = ina219.getShuntVoltage_mV();
   busvoltage = ina219.getBusVoltage_V();
@@ -90,18 +106,16 @@ void loop() {
              String(shuntvoltage) + ", " + 
              String(loadvoltage) + ", " + 
              String(current_mA) + ", " + 
-             String(power_mW) + "\n";
+             String(power_mW) + ", " +
+             String(eventData) + ", " +
+             String(signalState) + "\n";
 
-  Serial.print(busvoltage); Serial.print(", "); 
-  Serial.print(shuntvoltage); Serial.print(", ");
-  Serial.print(loadvoltage); Serial.print(", ");
-  Serial.print(current_mA); Serial.print(", ");
-  Serial.println(power_mW);
+  Serial.println(row);
 
   // Write to SD
   const char* row_c_str = row.c_str();
   
   appendFile(SD_MMC, "/data.csv", row_c_str);
 
-  delay(250);
+  delay(125);
 }

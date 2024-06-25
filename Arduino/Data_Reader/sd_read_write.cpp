@@ -103,7 +103,7 @@ void writeAudioFile(fs::FS &fs, const char * path, File &sourceFile){
 }
 
 void appendFile(fs::FS &fs, const char * path, const char * message){
-    Serial.printf("Appending to file: %s\n", path);
+    // Serial.printf("Appending to file: %s\n", path);
 
     File file = fs.open(path, FILE_APPEND);
     if(!file){
@@ -111,7 +111,7 @@ void appendFile(fs::FS &fs, const char * path, const char * message){
         return;
     }
     if(file.print(message)){
-        Serial.println("Message appended");
+        // Serial.println("Message appended");
     } else {
         Serial.println("Append failed");
     }
