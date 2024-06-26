@@ -3,6 +3,9 @@
 Thumbs.db
 *config.h
 
+#images
+*.jpeg
+
 # ESP-IDF specific
 build/
 sdkconfig
