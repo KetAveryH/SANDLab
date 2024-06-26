@@ -49,66 +49,66 @@ private:
     Add2D<int16_t> l21;  // model_2/add_22/add, output_exponent: -10
 
     Conv2D<int16_t> l22;  // model_2/conv2d_84/Conv2D, output_exponent: -11
-    DepthwiseConv2D<int16_t> l23;  // model_2/depthwise_conv2d_40/depthwise, output_exponent: -10
-    Conv2D<int16_t> l24;  // model_2/conv2d_85/Conv2D, output_exponent: -11
-    Conv2D<int16_t> l25;  // model_2/conv2d_86/Conv2D, output_exponent: -10
-    DepthwiseConv2D<int16_t> l26;  // model_2/depthwise_conv2d_41/depthwise, output_exponent: -10
-    Conv2D<int16_t> l27;  // model_2/conv2d_87/Conv2D, output_exponent: -10
+    // DepthwiseConv2D<int16_t> l23;  // model_2/depthwise_conv2d_40/depthwise, output_exponent: -10
+    // Conv2D<int16_t> l24;  // model_2/conv2d_85/Conv2D, output_exponent: -11
+    // Conv2D<int16_t> l25;  // model_2/conv2d_86/Conv2D, output_exponent: -10
+    // DepthwiseConv2D<int16_t> l26;  // model_2/depthwise_conv2d_41/depthwise, output_exponent: -10
+    // Conv2D<int16_t> l27;  // model_2/conv2d_87/Conv2D, output_exponent: -10
 
-    Add2D<int16_t> l28;  // model_2/add_23/add, output_exponent: -10
+    // Add2D<int16_t> l28;  // model_2/add_23/add, output_exponent: -10
 
-    Conv2D<int16_t> l29;  // model_2/conv2d_88/Conv2D, output_exponent: -10
-    DepthwiseConv2D<int16_t> l30;  // model_2/depthwise_conv2d_42/depthwise, output_exponent: -10
-    Conv2D<int16_t> l31;  // model_2/conv2d_89/Conv2D, output_exponent: -10
+    // Conv2D<int16_t> l29;  // model_2/conv2d_88/Conv2D, output_exponent: -10
+    // DepthwiseConv2D<int16_t> l30;  // model_2/depthwise_conv2d_42/depthwise, output_exponent: -10
+    // Conv2D<int16_t> l31;  // model_2/conv2d_89/Conv2D, output_exponent: -10
 
-    Add2D<int16_t> l32;  // model_2/add_24/add, output_exponent: -9
+    // Add2D<int16_t> l32;  // model_2/add_24/add, output_exponent: -9
 
-    Conv2D<int16_t> l33;  // model_2/conv2d_90/Conv2D, output_exponent: -10
-    DepthwiseConv2D<int16_t> l34;  // model_2/depthwise_conv2d_43/depthwise, output_exponent: -9
-    Conv2D<int16_t> l35;  // model_2/conv2d_91/Conv2D, output_exponent: -9
+    // Conv2D<int16_t> l33;  // model_2/conv2d_90/Conv2D, output_exponent: -10
+    // DepthwiseConv2D<int16_t> l34;  // model_2/depthwise_conv2d_43/depthwise, output_exponent: -9
+    // Conv2D<int16_t> l35;  // model_2/conv2d_91/Conv2D, output_exponent: -9
 
-    Add2D<int16_t> l36;  // model_2/add_25/add, output_exponent: -9
+    // Add2D<int16_t> l36;  // model_2/add_25/add, output_exponent: -9
     
-    Conv2D<int16_t> l37;  // model_2/conv2d_92/Conv2D, output_exponent: -10
-    DepthwiseConv2D<int16_t> l38;  // model_2/depthwise_conv2d_44/depthwise, output_exponent: -10
-    Conv2D<int16_t> l39;  // model_2/conv2d_93/Conv2D, output_exponent: -10
-    Conv2D<int16_t> l40;  // model_2/conv2d_94/Conv2D, output_exponent: -10
-    DepthwiseConv2D<int16_t> l41;  // model_2/depthwise_conv2d_45/depthwise, output_exponent: -9
-    Conv2D<int16_t> l42;  // model_2/conv2d_95/Conv2D, output_exponent: -9
+    // Conv2D<int16_t> l37;  // model_2/conv2d_92/Conv2D, output_exponent: -10f
+    // DepthwiseConv2D<int16_t> l38;  // model_2/depthwise_conv2d_44/depthwise, output_exponent: -10
+    // Conv2D<int16_t> l39;  // model_2/conv2d_93/Conv2D, output_exponent: -10
+    // Conv2D<int16_t> l40;  // model_2/conv2d_94/Conv2D, output_exponent: -10
+    // DepthwiseConv2D<int16_t> l41;  // model_2/depthwise_conv2d_45/depthwise, output_exponent: -9
+    // Conv2D<int16_t> l42;  // model_2/conv2d_95/Conv2D, output_exponent: -9
     
-    Add2D<int16_t> l43;  // model_2/add_26/add, output_exponent: -9
+    // Add2D<int16_t> l43;  // model_2/add_26/add, output_exponent: -9
 
-    Conv2D<int16_t> l44;  // model_2/conv2d_96/Conv2D, output_exponent: -10
-    DepthwiseConv2D<int16_t> l45;  // model_2/depthwise_conv2d_46/depthwise, output_exponent: -9
-    Conv2D<int16_t> l46;  // model_2/conv2d_97/Conv2D, output_exponent: -9
+    // Conv2D<int16_t> l44;  // model_2/conv2d_96/Conv2D, output_exponent: -10
+    // DepthwiseConv2D<int16_t> l45;  // model_2/depthwise_conv2d_46/depthwise, output_exponent: -9
+    // Conv2D<int16_t> l46;  // model_2/conv2d_97/Conv2D, output_exponent: -9
 
-    Add2D<int16_t> l47;  // model_2/add_27/add, output_exponent: -8
+    // Add2D<int16_t> l47;  // model_2/add_27/add, output_exponent: -8
     
-    Conv2D<int16_t> l48;  // model_2/conv2d_98/Conv2D, output_exponent: -9
-    DepthwiseConv2D<int16_t> l49;  // model_2/depthwise_conv2d_47/depthwise, output_exponent: -9
-    Conv2D<int16_t> l50;  // model_2/conv2d_99/Conv2D, output_exponent: -10
-    Conv2D<int16_t> l51;  // model_2/conv2d_100/Conv2D, output_exponent: -9
-    DepthwiseConv2D<int16_t> l52;  // model_2/depthwise_conv2d_48/depthwise, output_exponent: -9
-    Conv2D<int16_t> l53;  // model_2/conv2d_101/Conv2D, output_exponent: -9
+    // Conv2D<int16_t> l48;  // model_2/conv2d_98/Conv2D, output_exponent: -9
+    // DepthwiseConv2D<int16_t> l49;  // model_2/depthwise_conv2d_47/depthwise, output_exponent: -9
+    // Conv2D<int16_t> l50;  // model_2/conv2d_99/Conv2D, output_exponent: -10
+    // Conv2D<int16_t> l51;  // model_2/conv2d_100/Conv2D, output_exponent: -9
+    // DepthwiseConv2D<int16_t> l52;  // model_2/depthwise_conv2d_48/depthwise, output_exponent: -9
+    // Conv2D<int16_t> l53;  // model_2/conv2d_101/Conv2D, output_exponent: -9
     
-    Add2D<int16_t> l54;  // model_2/add_28/add, output_exponent: -9
+    // Add2D<int16_t> l54;  // model_2/add_28/add, output_exponent: -9
 
-    Conv2D<int16_t> l55;  // model_2/conv2d_102/Conv2D, output_exponent: -9
-    DepthwiseConv2D<int16_t> l56;  // model_2/depthwise_conv2d_49/depthwise, output_exponent: -9
-    Conv2D<int16_t> l57;  // model_2/conv2d_103/Conv2D, output_exponent: -9
+    // Conv2D<int16_t> l55;  // model_2/conv2d_102/Conv2D, output_exponent: -9
+    // DepthwiseConv2D<int16_t> l56;  // model_2/depthwise_conv2d_49/depthwise, output_exponent: -9
+    // Conv2D<int16_t> l57;  // model_2/conv2d_103/Conv2D, output_exponent: -9
 
-    Add2D<int16_t> l58;  // model_2/add_29/add, output_exponent: -8
+    // Add2D<int16_t> l58;  // model_2/add_29/add, output_exponent: -8
 
-    Conv2D<int16_t> l59;  // model_2/conv2d_104/Conv2D, output_exponent: -9
-    DepthwiseConv2D<int16_t> l60;  // model_2/depthwise_conv2d_50/depthwise, output_exponent: -8
-    Conv2D<int16_t> l61;  // model_2/conv2d_105/Conv2D, output_exponent: -8
-    Conv2D<int16_t> l62;  // model_2/conv2d_106/Conv2D, output_exponent: -8
+    // Conv2D<int16_t> l59;  // model_2/conv2d_104/Conv2D, output_exponent: -9
+    // DepthwiseConv2D<int16_t> l60;  // model_2/depthwise_conv2d_50/depthwise, output_exponent: -8
+    // Conv2D<int16_t> l61;  // model_2/conv2d_105/Conv2D, output_exponent: -8
+    // Conv2D<int16_t> l62;  // model_2/conv2d_106/Conv2D, output_exponent: -8
 
-    GlobalAveragePool2D<int16_t> l63;  // model_2/global_average_pooling2d_2/Mean, output_exponent: -8
-    Squeeze<int16_t> l64;  // model_2/global_average_pooling2d_2/Mean_Squeeze__559, output_exponent: -8
-    Conv2D<int16_t> l65;  // model_2/conv2d_107/BiasAdd, output_exponent: -9
+    // GlobalAveragePool2D<int16_t> l63;  // model_2/global_average_pooling2d_2/Mean, output_exponent: -8
+    // Squeeze<int16_t> l64;  // model_2/global_average_pooling2d_2/Mean_Squeeze__559, output_exponent: -8
+    // Conv2D<int16_t> l65;  // model_2/conv2d_107/BiasAdd, output_exponent: -9
 
-    Flatten<int16_t> l66;  // model_2/flatten_2/Reshape, output_exponent: -9
+    // Flatten<int16_t> l66;  // model_2/flatten_2/Reshape, output_exponent: -9
     
 
 
@@ -121,7 +121,7 @@ private:
 
 
 public:
-    DepthwiseConv2D<int16_t> l52;  // fused_gemm_0, output_exponent: -10
+    DepthwiseConv2D<int16_t> l23;  // fused_gemm_0, output_exponent: -10
 
     /**
      * @brief Initialize layers in constructor function
@@ -158,46 +158,46 @@ public:
         l21(Add2D<int16_t>(-10, NULL)),
 
         l22(Conv2D<int16_t>(-11, get_model_2_conv2d_84_conv2d_filter(), get_model_2_conv2d_84_conv2d_bias(), get_model_2_conv2d_84_conv2d_activation())),
-        l23(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_40_depthwise_filter(), get_model_2_depthwise_conv2d_40_depthwise_bias(), get_model_2_depthwise_conv2d_40_depthwise_activation())),
-        l24(Conv2D<int16_t>(-11, get_model_2_conv2d_85_conv2d_filter(), get_model_2_conv2d_85_conv2d_bias())),
-        l25(Conv2D<int16_t>(-10, get_model_2_conv2d_86_conv2d_filter(), get_model_2_conv2d_86_conv2d_bias(), get_model_2_conv2d_86_conv2d_activation())),
-        l26(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_41_depthwise_filter(), get_model_2_depthwise_conv2d_41_depthwise_bias(), get_model_2_depthwise_conv2d_41_depthwise_activation())),
-        l27(Conv2D<int16_t>(-10, get_model_2_conv2d_87_conv2d_filter(), get_model_2_conv2d_87_conv2d_bias())),
+        l23(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_40_depthwise_filter(), get_model_2_depthwise_conv2d_40_depthwise_bias(), get_model_2_depthwise_conv2d_40_depthwise_activation())){}
+        // l24(Conv2D<int16_t>(-11, get_model_2_conv2d_85_conv2d_filter(), get_model_2_conv2d_85_conv2d_bias())),
+        // l25(Conv2D<int16_t>(-10, get_model_2_conv2d_86_conv2d_filter(), get_model_2_conv2d_86_conv2d_bias(), get_model_2_conv2d_86_conv2d_activation())),
+        // l26(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_41_depthwise_filter(), get_model_2_depthwise_conv2d_41_depthwise_bias(), get_model_2_depthwise_conv2d_41_depthwise_activation())),
+        // l27(Conv2D<int16_t>(-10, get_model_2_conv2d_87_conv2d_filter(), get_model_2_conv2d_87_conv2d_bias())),
 
-        l28(Add2D<int16_t>(-10, NULL)),
+        // l28(Add2D<int16_t>(-10, NULL)),
 
-        l29(Conv2D<int16_t>(-10, get_model_2_conv2d_88_conv2d_filter(), get_model_2_conv2d_88_conv2d_bias(), get_model_2_conv2d_88_conv2d_activation())),
-        l30(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_42_depthwise_filter(), get_model_2_depthwise_conv2d_42_depthwise_bias(), get_model_2_depthwise_conv2d_42_depthwise_activation())),
-        l31(Conv2D<int16_t>(-10, get_model_2_conv2d_89_conv2d_filter(), get_model_2_conv2d_89_conv2d_bias())),
+        // l29(Conv2D<int16_t>(-10, get_model_2_conv2d_88_conv2d_filter(), get_model_2_conv2d_88_conv2d_bias(), get_model_2_conv2d_88_conv2d_activation())),
+        // l30(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_42_depthwise_filter(), get_model_2_depthwise_conv2d_42_depthwise_bias(), get_model_2_depthwise_conv2d_42_depthwise_activation())),
+        // l31(Conv2D<int16_t>(-10, get_model_2_conv2d_89_conv2d_filter(), get_model_2_conv2d_89_conv2d_bias())),
 
-        l32(Add2D<int16_t>(-9, NULL)),
+        // l32(Add2D<int16_t>(-9, NULL)) {}
 
-        l33(Conv2D<int16_t>(-10, get_model_2_conv2d_90_conv2d_filter(), get_model_2_conv2d_90_conv2d_bias(), get_model_2_conv2d_90_conv2d_activation())),
-        l34(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_43_depthwise_filter(), get_model_2_depthwise_conv2d_43_depthwise_bias(), get_model_2_depthwise_conv2d_43_depthwise_activation())),
-        l35(Conv2D<int16_t>(-9, get_model_2_conv2d_91_conv2d_filter(), get_model_2_conv2d_91_conv2d_bias())),
+        // l33(Conv2D<int16_t>(-10, get_model_2_conv2d_90_conv2d_filter(), get_model_2_conv2d_90_conv2d_bias(), get_model_2_conv2d_90_conv2d_activation())),
+        // l34(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_43_depthwise_filter(), get_model_2_depthwise_conv2d_43_depthwise_bias(), get_model_2_depthwise_conv2d_43_depthwise_activation())),
+        // l35(Conv2D<int16_t>(-9, get_model_2_conv2d_91_conv2d_filter(), get_model_2_conv2d_91_conv2d_bias())){}
 
-        l36(Add2D<int16_t>(-9, NULL)),
+        // l36(Add2D<int16_t>(-9, NULL)),
         
-        l37(Conv2D<int16_t>(-10, get_model_2_conv2d_92_conv2d_filter(), get_model_2_conv2d_92_conv2d_bias(), get_model_2_conv2d_92_conv2d_activation())),
-        l38(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_44_depthwise_filter(), get_model_2_depthwise_conv2d_44_depthwise_bias(), get_model_2_depthwise_conv2d_44_depthwise_activation())),
-        l39(Conv2D<int16_t>(-10, get_model_2_conv2d_93_conv2d_filter(), get_model_2_conv2d_93_conv2d_bias())),
-        l40(Conv2D<int16_t>(-10, get_model_2_conv2d_94_conv2d_filter(), get_model_2_conv2d_94_conv2d_bias(), get_model_2_conv2d_94_conv2d_activation())),
-        l41(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_45_depthwise_filter(), get_model_2_depthwise_conv2d_45_depthwise_bias(), get_model_2_depthwise_conv2d_45_depthwise_activation())),
-        l42(Conv2D<int16_t>(-9, get_model_2_conv2d_95_conv2d_filter(), get_model_2_conv2d_95_conv2d_bias())),
+        // l37(Conv2D<int16_t>(-10, get_model_2_conv2d_92_conv2d_filter(), get_model_2_conv2d_92_conv2d_bias(), get_model_2_conv2d_92_conv2d_activation())),
+        // l38(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_44_depthwise_filter(), get_model_2_depthwise_conv2d_44_depthwise_bias(), get_model_2_depthwise_conv2d_44_depthwise_activation())){}
+        // l39(Conv2D<int16_t>(-10, get_model_2_conv2d_93_conv2d_filter(), get_model_2_conv2d_93_conv2d_bias())),
+        // l40(Conv2D<int16_t>(-10, get_model_2_conv2d_94_conv2d_filter(), get_model_2_conv2d_94_conv2d_bias(), get_model_2_conv2d_94_conv2d_activation())),
+        // l41(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_45_depthwise_filter(), get_model_2_depthwise_conv2d_45_depthwise_bias(), get_model_2_depthwise_conv2d_45_depthwise_activation())),
+        // l42(Conv2D<int16_t>(-9, get_model_2_conv2d_95_conv2d_filter(), get_model_2_conv2d_95_conv2d_bias())),
         
-        l43(Add2D<int16_t>(-9, NULL)),
+        // l43(Add2D<int16_t>(-9, NULL)),
 
-        l44(Conv2D<int16_t>(-10, get_model_2_conv2d_96_conv2d_filter(), get_model_2_conv2d_96_conv2d_bias(), get_model_2_conv2d_96_conv2d_activation())),
-        l45(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_46_depthwise_filter(), get_model_2_depthwise_conv2d_46_depthwise_bias(), get_model_2_depthwise_conv2d_46_depthwise_activation())),
-        l46(Conv2D<int16_t>(-9, get_model_2_conv2d_97_conv2d_filter(), get_model_2_conv2d_97_conv2d_bias())),
+        // l44(Conv2D<int16_t>(-10, get_model_2_conv2d_96_conv2d_filter(), get_model_2_conv2d_96_conv2d_bias(), get_model_2_conv2d_96_conv2d_activation())),
+        // l45(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_46_depthwise_filter(), get_model_2_depthwise_conv2d_46_depthwise_bias(), get_model_2_depthwise_conv2d_46_depthwise_activation())),
+        // l46(Conv2D<int16_t>(-9, get_model_2_conv2d_97_conv2d_filter(), get_model_2_conv2d_97_conv2d_bias())),
 
-        l47(Add2D<int16_t>(-8, NULL)),
+        // l47(Add2D<int16_t>(-8, NULL)),
         
-        l48(Conv2D<int16_t>(-9, get_model_2_conv2d_98_conv2d_filter(), get_model_2_conv2d_98_conv2d_bias(), get_model_2_conv2d_98_conv2d_activation())),
-        l49(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_47_depthwise_filter(), get_model_2_depthwise_conv2d_47_depthwise_bias(), get_model_2_depthwise_conv2d_47_depthwise_activation())),
-        l50(Conv2D<int16_t>(-10, get_model_2_conv2d_99_conv2d_filter(), get_model_2_conv2d_99_conv2d_bias())),
-        l51(Conv2D<int16_t>(-9, get_model_2_conv2d_100_conv2d_filter(), get_model_2_conv2d_100_conv2d_bias(), get_model_2_conv2d_100_conv2d_activation())),
-        l52(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_48_depthwise_filter(), get_model_2_depthwise_conv2d_48_depthwise_bias(), get_model_2_depthwise_conv2d_48_depthwise_activation())),
+        // l48(Conv2D<int16_t>(-9, get_model_2_conv2d_98_conv2d_filter(), get_model_2_conv2d_98_conv2d_bias(), get_model_2_conv2d_98_conv2d_activation())),
+        // l49(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_47_depthwise_filter(), get_model_2_depthwise_conv2d_47_depthwise_bias(), get_model_2_depthwise_conv2d_47_depthwise_activation())){}
+        // l50(Conv2D<int16_t>(-10, get_model_2_conv2d_99_conv2d_filter(), get_model_2_conv2d_99_conv2d_bias())),
+        // l51(Conv2D<int16_t>(-9, get_model_2_conv2d_100_conv2d_filter(), get_model_2_conv2d_100_conv2d_bias(), get_model_2_conv2d_100_conv2d_activation())),
+        // l52(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_48_depthwise_filter(), get_model_2_depthwise_conv2d_48_depthwise_bias(), get_model_2_depthwise_conv2d_48_depthwise_activation()))
         
         // l53(Conv2D<int16_t>(-9, get_model_2_conv2d_101_conv2d_filter(), get_model_2_conv2d_101_conv2d_bias())),
         
@@ -220,7 +220,7 @@ public:
         // l66(Flatten<int16_t>()),  // Flatten
 
         // l67(FullyConnected<int16_t>(-10, get_fused_gemm_0_filter(), get_fused_gemm_0_bias(), NULL))   // Fully Connected
-    {}
+    
 
 /**
  * @brief call each layers' build(...) function in sequence
@@ -324,109 +324,109 @@ void build(Tensor<int16_t> &input)
     shape = this->l23.get_output().shape;
     std::cout << "After l23 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l24.build(this->l23.get_output());
-    shape = this->l24.get_output().shape;
-    std::cout << "After l24 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l24.build(this->l23.get_output());
+    // shape = this->l24.get_output().shape;
+    // std::cout << "After l24 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l25.build(this->l24.get_output());
-    shape = this->l25.get_output().shape;
-    std::cout << "After l25 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l25.build(this->l24.get_output());
+    // shape = this->l25.get_output().shape;
+    // std::cout << "After l25 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l26.build(this->l25.get_output());
-    shape = this->l26.get_output().shape;
-    std::cout << "After l26 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l26.build(this->l25.get_output());
+    // shape = this->l26.get_output().shape;
+    // std::cout << "After l26 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l27.build(this->l26.get_output());
-    shape = this->l27.get_output().shape;
-    std::cout << "After l27 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l27.build(this->l26.get_output());
+    // shape = this->l27.get_output().shape;
+    // std::cout << "After l27 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l28.build(this->l27.get_output(), this->l24.get_output());
-    shape = this->l28.get_output().shape;
-    std::cout << "After l28 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l28.build(this->l27.get_output(), this->l24.get_output());
+    // shape = this->l28.get_output().shape;
+    // std::cout << "After l28 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l29.build(this->l28.get_output());
-    shape = this->l29.get_output().shape;
-    std::cout << "After l29 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l29.build(this->l28.get_output());
+    // shape = this->l29.get_output().shape;
+    // std::cout << "After l29 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l30.build(this->l29.get_output());
-    shape = this->l30.get_output().shape;
-    std::cout << "After l30 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l30.build(this->l29.get_output());
+    // shape = this->l30.get_output().shape;
+    // std::cout << "After l30 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l31.build(this->l30.get_output());
-    shape = this->l31.get_output().shape;
-    std::cout << "After l31 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l31.build(this->l30.get_output());
+    // shape = this->l31.get_output().shape;
+    // std::cout << "After l31 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l32.build(this->l31.get_output(), this->l28.get_output());
-    shape = this->l32.get_output().shape;
-    std::cout << "After l32 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l32.build(this->l31.get_output(), this->l28.get_output());
+    // shape = this->l32.get_output().shape;
+    // std::cout << "After l32 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l33.build(this->l32.get_output());
-    shape = this->l33.get_output().shape;
-    std::cout << "After l33 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l33.build(this->l32.get_output());
+    // shape = this->l33.get_output().shape;
+    // std::cout << "After l33 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l34.build(this->l33.get_output());
-    shape = this->l34.get_output().shape;
-    std::cout << "After l34 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l34.build(this->l33.get_output());
+    // shape = this->l34.get_output().shape;
+    // std::cout << "After l34 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l35.build(this->l34.get_output());
-    shape = this->l35.get_output().shape;
-    std::cout << "After l35 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l35.build(this->l34.get_output());
+    // shape = this->l35.get_output().shape;
+    // std::cout << "After l35 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l36.build(this->l35.get_output(), this->l32.get_output()); ////
-    shape = this->l36.get_output().shape;
-    std::cout << "After l36 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l36.build(this->l35.get_output(), this->l32.get_output()); ////
+    // shape = this->l36.get_output().shape;
+    // std::cout << "After l36 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l37.build(this->l36.get_output());
-    shape = this->l37.get_output().shape;
-    std::cout << "After l37 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l37.build(this->l36.get_output());
+    // shape = this->l37.get_output().shape;
+    // std::cout << "After l37 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l38.build(this->l37.get_output());
-    shape = this->l38.get_output().shape;
-    std::cout << "After l38 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l38.build(this->l37.get_output());
+    // shape = this->l38.get_output().shape;
+    // std::cout << "After l38 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l39.build(this->l38.get_output());
-    shape = this->l39.get_output().shape;
-    std::cout << "After l39 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l39.build(this->l38.get_output());
+    // shape = this->l39.get_output().shape;
+    // std::cout << "After l39 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l40.build(this->l39.get_output());
-    shape = this->l40.get_output().shape;
-    std::cout << "After l40 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l40.build(this->l39.get_output());
+    // shape = this->l40.get_output().shape;
+    // std::cout << "After l40 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l41.build(this->l40.get_output());
-    shape = this->l41.get_output().shape;
-    std::cout << "After l41 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l41.build(this->l40.get_output());
+    // shape = this->l41.get_output().shape;
+    // std::cout << "After l41 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l42.build(this->l41.get_output());
-    shape = this->l42.get_output().shape;
-    std::cout << "After l42 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l42.build(this->l41.get_output());
+    // shape = this->l42.get_output().shape;
+    // std::cout << "After l42 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l43.build(this->l42.get_output(), this->l3.get_output());
-    shape = this->l43.get_output().shape;
-    std::cout << "After l43 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l43.build(this->l42.get_output(), this->l3.get_output());
+    // shape = this->l43.get_output().shape;
+    // std::cout << "After l43 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l44.build(this->l43.get_output());
-    shape = this->l44.get_output().shape;
-    std::cout << "After l44 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l44.build(this->l43.get_output());
+    // shape = this->l44.get_output().shape;
+    // std::cout << "After l44 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l45.build(this->l44.get_output());
-    shape = this->l45.get_output().shape;
-    std::cout << "After l45 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l45.build(this->l44.get_output());
+    // shape = this->l45.get_output().shape;
+    // std::cout << "After l45 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l46.build(this->l45.get_output());
-    shape = this->l46.get_output().shape;
-    std::cout << "After l46 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l46.build(this->l45.get_output());
+    // shape = this->l46.get_output().shape;
+    // std::cout << "After l46 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l47.build(this->l46.get_output(), this->l43.get_output());
-    shape = this->l47.get_output().shape;
-    std::cout << "After l47 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l47.build(this->l46.get_output(), this->l43.get_output());
+    // shape = this->l47.get_output().shape;
+    // std::cout << "After l47 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l48.build(this->l47.get_output());
-    shape = this->l48.get_output().shape;
-    std::cout << "After l48 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l48.build(this->l47.get_output());
+    // shape = this->l48.get_output().shape;
+    // std::cout << "After l48 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l49.build(this->l48.get_output());
-    shape = this->l49.get_output().shape;
-    std::cout << "After l49 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l49.build(this->l48.get_output());
+    // shape = this->l49.get_output().shape;
+    // std::cout << "After l49 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
     // this->l50.build(this->l49.get_output());
     // shape = this->l50.get_output().shape;
@@ -578,83 +578,83 @@ void call(Tensor<int16_t> &input)
     this->l23.call(this->l22.get_output());
     this->l22.get_output().free_element();
 
-    this->l24.call(this->l23.get_output());
-    this->l23.get_output().free_element();
+    // this->l24.call(this->l23.get_output());
+    // this->l23.get_output().free_element();
 
-    this->l25.call(this->l24.get_output());
-    this->l24.get_output().free_element();
+    // this->l25.call(this->l24.get_output());
+    // this->l24.get_output().free_element();
 
-    this->l26.call(this->l25.get_output());
-    this->l25.get_output().free_element();
+    // this->l26.call(this->l25.get_output());
+    // this->l25.get_output().free_element();
 
-    this->l27.call(this->l26.get_output());
-    this->l26.get_output().free_element();
+    // this->l27.call(this->l26.get_output());
+    // this->l26.get_output().free_element();
 
-    this->l28.call(this->l27.get_output(), this->l24.get_output());
-    this->l27.get_output().free_element();
+    // this->l28.call(this->l27.get_output(), this->l24.get_output());
+    // this->l27.get_output().free_element();
 
-    this->l29.call(this->l28.get_output());
-    this->l28.get_output().free_element();
+    // this->l29.call(this->l28.get_output());
+    // this->l28.get_output().free_element();
 
-    this->l30.call(this->l29.get_output());
-    this->l29.get_output().free_element();
+    // this->l30.call(this->l29.get_output());
+    // this->l29.get_output().free_element();
 
-    this->l31.call(this->l30.get_output());
-    this->l30.get_output().free_element();
+    // this->l31.call(this->l30.get_output());
+    // this->l30.get_output().free_element();
 
-    this->l32.call(this->l31.get_output(), this->l28.get_output());
-    this->l31.get_output().free_element();
+    // this->l32.call(this->l31.get_output(), this->l28.get_output());
+    // this->l31.get_output().free_element();
 
-    this->l33.call(this->l32.get_output());
-    this->l32.get_output().free_element();
+    // this->l33.call(this->l32.get_output());
+    // this->l32.get_output().free_element();
 
-    this->l34.call(this->l33.get_output());
-    this->l33.get_output().free_element();
+    // this->l34.call(this->l33.get_output());
+    // this->l33.get_output().free_element();
 
-    this->l35.call(this->l34.get_output());
-    this->l34.get_output().free_element();
+    // this->l35.call(this->l34.get_output());
+    // this->l34.get_output().free_element();
 
-    this->l36.call(this->l35.get_output(), this->l32.get_output());
-    this->l35.get_output().free_element();
+    // this->l36.call(this->l35.get_output(), this->l32.get_output());
+    // this->l35.get_output().free_element();
 
-    this->l37.call(this->l36.get_output());
-    this->l36.get_output().free_element();
+    // this->l37.call(this->l36.get_output());
+    // this->l36.get_output().free_element();
 
-    this->l38.call(this->l37.get_output());
-    this->l37.get_output().free_element();
+    // this->l38.call(this->l37.get_output());
+    // this->l37.get_output().free_element();
 
-    this->l39.call(this->l38.get_output());
-    this->l38.get_output().free_element();
+    // this->l39.call(this->l38.get_output());
+    // this->l38.get_output().free_element();
 
-    this->l40.call(this->l39.get_output());
-    this->l39.get_output().free_element();
+    // this->l40.call(this->l39.get_output());
+    // this->l39.get_output().free_element();
 
-    this->l41.call(this->l40.get_output());
-    this->l40.get_output().free_element();
+    // this->l41.call(this->l40.get_output());
+    // this->l40.get_output().free_element();
 
-    this->l42.call(this->l41.get_output());
-    this->l41.get_output().free_element();
+    // this->l42.call(this->l41.get_output());
+    // this->l41.get_output().free_element();
 
-    this->l43.call(this->l42.get_output(), this->l3.get_output());
-    this->l42.get_output().free_element();
+    // this->l43.call(this->l42.get_output(), this->l3.get_output());
+    // this->l42.get_output().free_element();
 
-    this->l44.call(this->l43.get_output());
-    this->l43.get_output().free_element();
+    // this->l44.call(this->l43.get_output());
+    // this->l43.get_output().free_element();
 
-    this->l45.call(this->l44.get_output());
-    this->l44.get_output().free_element();
+    // this->l45.call(this->l44.get_output());
+    // this->l44.get_output().free_element();
 
-    this->l46.call(this->l45.get_output());
-    this->l45.get_output().free_element();
+    // this->l46.call(this->l45.get_output());
+    // this->l45.get_output().free_element();
 
-    this->l47.call(this->l46.get_output(), this->l43.get_output());
-    this->l46.get_output().free_element();
+    // this->l47.call(this->l46.get_output(), this->l43.get_output());
+    // this->l46.get_output().free_element();
 
-    this->l48.call(this->l47.get_output());
-    this->l47.get_output().free_element();
+    // this->l48.call(this->l47.get_output());
+    // this->l47.get_output().free_element();
 
-    this->l49.call(this->l48.get_output());
-    this->l48.get_output().free_element();
+    // this->l49.call(this->l48.get_output());
+    // this->l48.get_output().free_element();
 
 
     //Check about the free element
