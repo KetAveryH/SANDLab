@@ -212,7 +212,7 @@ namespace mobilenetv2_coefficient_12
     const dl::Bias<int16_t> *get_model_2_depthwise_conv2d_48_depthwise_bias();
     const dl::Activation<int16_t> *get_model_2_depthwise_conv2d_48_depthwise_activation();
     
-    // 45
+    // 45 Maybe Split
     const dl::Filter<int16_t> *get_model_2_conv2d_101_conv2d_filter();
     const dl::Bias<int16_t> *get_model_2_conv2d_101_conv2d_bias();
     
@@ -221,7 +221,7 @@ namespace mobilenetv2_coefficient_12
     const dl::Bias<int16_t> *get_model_2_conv2d_102_conv2d_bias();
     const dl::Activation<int16_t> *get_model_2_conv2d_102_conv2d_activation();
     
-    // 47
+    // 47 Split
     const dl::Filter<int16_t> *get_model_2_depthwise_conv2d_49_depthwise_filter();
     const dl::Bias<int16_t> *get_model_2_depthwise_conv2d_49_depthwise_bias();
     const dl::Activation<int16_t> *get_model_2_depthwise_conv2d_49_depthwise_activation();
