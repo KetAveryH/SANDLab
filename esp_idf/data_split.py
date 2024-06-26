@@ -11,7 +11,7 @@ image = image.resize((224, 224))
 
 # Convert image to numpy array and normalize it to [-1, 1]
 image_array = np.asarray(image)
-image_array = image_array / 127.5 - 1
+# image_array = image_array / 127.5 - 1
 
 # Optionally, convert to C++ array (as a string format if needed)
 cpp_array_str = ', '.join(map(str, image_array.flatten()))
