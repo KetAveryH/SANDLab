@@ -129,36 +129,35 @@ public:
      */
 
     MNIST() :
-        l1(Conv2D<int16_t>(-15, get_model_2_conv2d_72_conv2d_filter(), get_model_2_conv2d_72_conv2d_bias(), get_model_2_conv2d_72_conv2d_activation())),
-        l2(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_34_depthwise_filter(), get_model_2_depthwise_conv2d_34_depthwise_bias(), get_model_2_depthwise_conv2d_34_depthwise_activation())),
-        l3(Conv2D<int16_t>(-11, get_model_2_conv2d_73_conv2d_filter(), get_model_2_conv2d_73_conv2d_bias())),
-        l4(Conv2D<int16_t>(-11, get_model_2_conv2d_74_conv2d_filter(), get_model_2_conv2d_74_conv2d_bias(), get_model_2_conv2d_74_conv2d_activation())),
-
-        l5(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_35_depthwise_filter(), get_model_2_depthwise_conv2d_35_depthwise_bias(), get_model_2_depthwise_conv2d_35_depthwise_activation())),
-        l6(Conv2D<int16_t>(-10, get_model_2_conv2d_75_conv2d_filter(), get_model_2_conv2d_75_conv2d_bias())),
-        l7(Conv2D<int16_t>(-10, get_model_2_conv2d_76_conv2d_filter(), get_model_2_conv2d_76_conv2d_bias(), get_model_2_conv2d_76_conv2d_activation())),
-        l8(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_36_depthwise_filter(), get_model_2_depthwise_conv2d_36_depthwise_bias(), get_model_2_depthwise_conv2d_36_depthwise_activation())),
-        l9(Conv2D<int16_t>(-11, get_model_2_conv2d_77_conv2d_filter(), get_model_2_conv2d_77_conv2d_bias())),
+        l1(Conv2D<int16_t>(-15, get_model_2_conv2d_72_conv2d_filter(), get_model_2_conv2d_72_conv2d_bias(), get_model_2_conv2d_72_conv2d_activation(), PADDING_SAME_BEGIN, {0, 0, 1, 1}, 2, 2)),
+        l2(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_34_depthwise_filter(), get_model_2_depthwise_conv2d_34_depthwise_bias(), get_model_2_depthwise_conv2d_34_depthwise_activation(), PADDING_SAME_BEGIN, {1, 1, 1, 1}, 1, 1)),
+        l3(Conv2D<int16_t>(-11, get_model_2_conv2d_73_conv2d_filter(), get_model_2_conv2d_73_conv2d_bias(), NULL, PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
+        l4(Conv2D<int16_t>(-11, get_model_2_conv2d_74_conv2d_filter(), get_model_2_conv2d_74_conv2d_bias(), get_model_2_conv2d_74_conv2d_activation(), PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
+        l5(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_35_depthwise_filter(), get_model_2_depthwise_conv2d_35_depthwise_bias(), get_model_2_depthwise_conv2d_35_depthwise_activation(), PADDING_SAME_BEGIN, {0, 0, 1, 1}, 2, 2)),
+        l6(Conv2D<int16_t>(-10, get_model_2_conv2d_75_conv2d_filter(), get_model_2_conv2d_75_conv2d_bias(), NULL, PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
+        l7(Conv2D<int16_t>(-10, get_model_2_conv2d_76_conv2d_filter(), get_model_2_conv2d_76_conv2d_bias(), get_model_2_conv2d_76_conv2d_activation(), PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
+        l8(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_36_depthwise_filter(), get_model_2_depthwise_conv2d_36_depthwise_bias(), get_model_2_depthwise_conv2d_36_depthwise_activation(), PADDING_SAME_BEGIN, {1, 1, 1, 1}, 1, 1)),
+        l9(Conv2D<int16_t>(-11, get_model_2_conv2d_77_conv2d_filter(), get_model_2_conv2d_77_conv2d_bias(), NULL, PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
 
         l10(Add2D<int16_t>(-10, NULL)),
 
-        l11(Conv2D<int16_t>(-10, get_model_2_conv2d_78_conv2d_filter(), get_model_2_conv2d_78_conv2d_bias(), get_model_2_conv2d_78_conv2d_activation())),
-        l12(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_37_depthwise_filter(), get_model_2_depthwise_conv2d_37_depthwise_bias(), get_model_2_depthwise_conv2d_37_depthwise_activation())),
-        l13(Conv2D<int16_t>(-11, get_model_2_conv2d_79_conv2d_filter(), get_model_2_conv2d_79_conv2d_bias())),
-        l14(Conv2D<int16_t>(-11, get_model_2_conv2d_80_conv2d_filter(), get_model_2_conv2d_80_conv2d_bias(), get_model_2_conv2d_80_conv2d_activation())),
-        l15(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_38_depthwise_filter(), get_model_2_depthwise_conv2d_38_depthwise_bias(), get_model_2_depthwise_conv2d_38_depthwise_activation())),
-        l16(Conv2D<int16_t>(-11, get_model_2_conv2d_81_conv2d_filter(), get_model_2_conv2d_81_conv2d_bias())),
+        l11(Conv2D<int16_t>(-10, get_model_2_conv2d_78_conv2d_filter(), get_model_2_conv2d_78_conv2d_bias(), get_model_2_conv2d_78_conv2d_activation(), PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
+        l12(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_37_depthwise_filter(), get_model_2_depthwise_conv2d_37_depthwise_bias(), get_model_2_depthwise_conv2d_37_depthwise_activation(), PADDING_SAME_BEGIN, {0, 0, 1, 1}, 2, 2)),
+        l13(Conv2D<int16_t>(-11, get_model_2_conv2d_79_conv2d_filter(), get_model_2_conv2d_79_conv2d_bias(), NULL, PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
+        l14(Conv2D<int16_t>(-11, get_model_2_conv2d_80_conv2d_filter(), get_model_2_conv2d_80_conv2d_bias(), get_model_2_conv2d_80_conv2d_activation(), PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
+        l15(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_38_depthwise_filter(), get_model_2_depthwise_conv2d_38_depthwise_bias(), get_model_2_depthwise_conv2d_38_depthwise_activation(), PADDING_SAME_BEGIN, {1, 1, 1, 1}, 1, 1)),
+        l16(Conv2D<int16_t>(-11, get_model_2_conv2d_81_conv2d_filter(), get_model_2_conv2d_81_conv2d_bias(), NULL, PADDING_SAME_BEGIN, {0, 0, 0, 0}, 1, 1)),
         
         l17(Add2D<int16_t>(-10, NULL)),
 
-        l18(Conv2D<int16_t>(-11, get_model_2_conv2d_82_conv2d_filter(), get_model_2_conv2d_82_conv2d_bias(), get_model_2_conv2d_82_conv2d_activation())),
-        l19(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_39_depthwise_filter(), get_model_2_depthwise_conv2d_39_depthwise_bias(), get_model_2_depthwise_conv2d_39_depthwise_activation())),
-        l20(Conv2D<int16_t>(-11, get_model_2_conv2d_83_conv2d_filter(), get_model_2_conv2d_83_conv2d_bias())),
+        l18(Conv2D<int16_t>(-11, get_model_2_conv2d_82_conv2d_filter(), get_model_2_conv2d_82_conv2d_bias(), get_model_2_conv2d_82_conv2d_activation(), PADDING_SAME_BEGIN, {0,0,0,0}, 1,1)),
+        l19(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_39_depthwise_filter(), get_model_2_depthwise_conv2d_39_depthwise_bias(), get_model_2_depthwise_conv2d_39_depthwise_activation(), PADDING_SAME_BEGIN, {1,1,1,1}, 1,1)),
+        l20(Conv2D<int16_t>(-11, get_model_2_conv2d_83_conv2d_filter(), get_model_2_conv2d_83_conv2d_bias(), NULL, PADDING_SAME_BEGIN, {0,0,0,0}, 1,1)),
 
         l21(Add2D<int16_t>(-10, NULL)),
 
-        l22(Conv2D<int16_t>(-11, get_model_2_conv2d_84_conv2d_filter(), get_model_2_conv2d_84_conv2d_bias(), get_model_2_conv2d_84_conv2d_activation())),
-        l23(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_40_depthwise_filter(), get_model_2_depthwise_conv2d_40_depthwise_bias(), get_model_2_depthwise_conv2d_40_depthwise_activation())){}
+        l22(Conv2D<int16_t>(-11, get_model_2_conv2d_84_conv2d_filter(), get_model_2_conv2d_84_conv2d_bias(), get_model_2_conv2d_84_conv2d_activation(), PADDING_SAME_BEGIN, {0,0,0,0}, 1,1)),
+        l23(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_40_depthwise_filter(), get_model_2_depthwise_conv2d_40_depthwise_bias(), get_model_2_depthwise_conv2d_40_depthwise_activation(), PADDING_SAME_BEGIN, {0,0,1,1}, 2,2)){}
         // l24(Conv2D<int16_t>(-11, get_model_2_conv2d_85_conv2d_filter(), get_model_2_conv2d_85_conv2d_bias())),
         // l25(Conv2D<int16_t>(-10, get_model_2_conv2d_86_conv2d_filter(), get_model_2_conv2d_86_conv2d_bias(), get_model_2_conv2d_86_conv2d_activation())),
         // l26(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_41_depthwise_filter(), get_model_2_depthwise_conv2d_41_depthwise_bias(), get_model_2_depthwise_conv2d_41_depthwise_activation())),
@@ -528,7 +527,7 @@ void call(Tensor<int16_t> &input)
     this->l5.get_output().free_element();
 
     this->l7.call(this->l6.get_output());
-    this->l6.get_output().free_element();
+    // this->l6.get_output().free_element();
 
     this->l8.call(this->l7.get_output());
     this->l7.get_output().free_element();
@@ -536,7 +535,9 @@ void call(Tensor<int16_t> &input)
     this->l9.call(this->l8.get_output());
     this->l8.get_output().free_element();
 
-    this->l10.call(this->l9.get_output(), this->l6.get_output());
+    this->l10.call(this->l9.get_output(), this->l6.get_output()); // issue
+
+    this->l6.get_output().free_element(); // Seeing what happens when i delay the free memory
     this->l9.get_output().free_element();
 
     this->l11.call(this->l10.get_output());
@@ -549,7 +550,7 @@ void call(Tensor<int16_t> &input)
     this->l12.get_output().free_element();
 
     this->l14.call(this->l13.get_output());
-    this->l13.get_output().free_element();
+    // this->l13.get_output().free_element();
 
     this->l15.call(this->l14.get_output());
     this->l14.get_output().free_element();
@@ -557,11 +558,14 @@ void call(Tensor<int16_t> &input)
     this->l16.call(this->l15.get_output());
     this->l15.get_output().free_element();
 
-    this->l17.call(this->l16.get_output(), this->l13.get_output());
+    this->l17.call(this->l16.get_output(), this->l13.get_output()); // issue
+
+    this->l13.get_output().free_element(); // What i changed is the free memory
     this->l16.get_output().free_element();
 
+
     this->l18.call(this->l17.get_output());
-    this->l17.get_output().free_element();
+    // this->l17.get_output().free_element();
 
     this->l19.call(this->l18.get_output());
     this->l18.get_output().free_element();
@@ -569,7 +573,9 @@ void call(Tensor<int16_t> &input)
     this->l20.call(this->l19.get_output());
     this->l19.get_output().free_element();
 
-    this->l21.call(this->l20.get_output(), this->l17.get_output());
+    this->l21.call(this->l20.get_output(), this->l17.get_output()); //issue
+
+    this->l17.get_output().free_element(); // These are the stuff that i changed
     this->l20.get_output().free_element();
 
     this->l22.call(this->l21.get_output());

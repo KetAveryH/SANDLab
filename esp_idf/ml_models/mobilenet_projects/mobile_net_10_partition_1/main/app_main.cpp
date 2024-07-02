@@ -14,8 +14,8 @@ extern "C" void app_main(void)
 {
     // input
 
-    int input_height = 244; //changed
-    int input_width = 244; //changed
+    int input_height = 224; //changed
+    int input_width = 224; //changed
     int input_channel = 3; //changed
     int input_exponent = -15; // to change and below
     int16_t *model_input = (int16_t *)dl::tool::malloc_aligned_prefer(input_height*input_width*input_channel, sizeof(int16_t *));
@@ -33,13 +33,24 @@ extern "C" void app_main(void)
 
     // model forward
     latency.start();
-    // model.build(input)
+
+// Forward then building sometimes work or build and then
+    model.build(input);
     model.forward(input);
+    
     latency.end();
-    latency.print("MNIST", "forward");
+    latency.print("MobileNetV2", "forward");
 
     // parse
-    model.l23.get_output().print_all();
+    Tensor<int16_t>&  intermediates = model.l23.get_output();
+    // intermediates.print_all();
+    int* list = intermediates.all_list();
+
+    // for (size_t i = 0; i < intermediates.get_size(); i++) {
+    //     std::cout<<list[i];
+    // }
+
+
     // esp32s3
     // MNIST::forward: 7243 us
     // -5523, 5300, 756, -4854, -4545, -3133, -1132, -1813, -2432, -7306, 
