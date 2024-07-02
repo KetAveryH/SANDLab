@@ -31,7 +31,7 @@
 // #define NODE_6
 
 int initialMillis = 0;
-int refMillis = 0;
+uint16_t refMillis = 0;
 int millisDif = 0;
 
 
@@ -276,6 +276,7 @@ String get_ina_data() {
                 String(signal_received_5) + ", " +
                 String(signal_received_6) + ", " +
                 String(millisDif);
+                
     for (int i = 0; i < NUM_NODES * 5; i++) {
         row += ", " + String(power_data[i]);
     }
@@ -395,13 +396,18 @@ void setup() {
     initialMillis = millis();
 }
 
-
+int loop_count = 0;
+String data = "";
 void loop() {
     String row = get_ina_data();
-    const char* row_c_str = row.c_str();
-    appendFile(SD_MMC, "/data.csv", row_c_str);
-
+    data = data + row;
+    
+    if (loop_count == 10) {
+        const char* data_c_str = data.c_str();
+        appendFile(SD_MMC, "/data.csv", data_c_str); // limitation is the number of appends to file, I instead will just append to a string that will then be appended every 10 ms
+    }
+    
     reset_signal_variables();
-
-    delay(10);
+    loop_count++;
+    delay(2);
 }
