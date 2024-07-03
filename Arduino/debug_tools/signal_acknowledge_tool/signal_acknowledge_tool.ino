@@ -23,6 +23,9 @@ void setup() {
 void loop() {
     delay(1000);
 
+    Serial.print(touchRead(T14));
+    Serial.print(" ");
+    Serial.println(touchRead(T3));
     if (touchRead(T14) > TOUCH_THRESH) {
       digitalWrite(SIGNAL_PIN, LOW);
       Serial.println("Signal Set Low");

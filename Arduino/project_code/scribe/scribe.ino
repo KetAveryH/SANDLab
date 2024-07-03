@@ -31,8 +31,9 @@
 // #define NODE_6
 
 int initialMillis = 0;
-uint16_t refMillis = 0;
+uint16_t last_signal_millis = 0;
 int millisDif = 0;
+
 
 
 // INA219's have a max of 4 distinguishable addresses per SDA and SCL pair (I2C line)
@@ -45,13 +46,6 @@ int millisDif = 0;
     void IRAM_ATTR signal1ISR() {  // ISR function ensures that on falling edge of the signal pin, the data is recorded
         signal_received_1 = 1;
 
-        // Return the difference in milliseconds
-        if (refMillis > 0) {
-            millisDif = millis() - refMillis;
-            refMillis = 0;
-        } else { 
-            refMillis = millis(); // If signal is for sending record start time
-        }
     }
 #else
     const char* signal_received_1 = "N/A";
@@ -65,14 +59,6 @@ int millisDif = 0;
 
     void IRAM_ATTR signal2ISR() {
         signal_received_2 = 1;
-
-        // Return the difference in milliseconds
-        if (refMillis > 0) {
-            millisDif = millis() - refMillis;
-            refMillis = 0;
-        } else { 
-            refMillis = millis(); // If signal is for sending record start time
-        }
     }
 #else
     const char* signal_received_2 = "N/A";
@@ -85,14 +71,6 @@ int millisDif = 0;
     int signal_received_3 = 0;
     void IRAM_ATTR signal3ISR() {
         signal_received_3 = 1;
-
-        // Return the difference in milliseconds
-        if (refMillis > 0) {
-            millisDif = millis() - refMillis;
-            refMillis = 0;
-        } else { 
-            refMillis = millis(); // If signal is for sending record start time
-        }
     }
 #else
     const char* signal_received_3 = "N/A";
@@ -103,16 +81,9 @@ int millisDif = 0;
     #define INA_ADDRESS_1_4 0x45
     Adafruit_INA219 ina219_1_4(INA_ADDRESS_1_4);
     int signal_received_4 = 0;
+
     void IRAM_ATTR signal4ISR() {
         signal_received_4 = 1;
-
-        // Return the difference in milliseconds
-        if (refMillis > 0) {
-            millisDif = millis() - refMillis;
-            refMillis = 0;
-        } else { 
-            refMillis = millis(); // If signal is for sending record start time
-        }
     }
 #else
     const char* signal_received_4 = "N/A";
@@ -124,16 +95,9 @@ int millisDif = 0;
     #define INA_ADDRESS_2_5 0x40
     Adafruit_INA219 ina219_2_5(INA_ADDRESS_2_5);
     int signal_received_5 = 0;
+    
     void IRAM_ATTR signal5ISR() {
         signal_received_5 = 1;
-
-        // Return the difference in milliseconds
-        if (refMillis > 0) {
-            millisDif = millis() - refMillis;
-            refMillis = 0;
-        } else { 
-            refMillis = millis(); // If signal is for sending record start time
-        }
     }
 #else
     const char* signal_received_5 = "N/A";
@@ -144,16 +108,9 @@ int millisDif = 0;
     #define INA_ADDRESS_2_6 0x41
     Adafruit_INA219 ina219_2_6(INA_ADDRESS_2_6);
     int signal_received_6 = 0;
+    
     void IRAM_ATTR signal6ISR() {
         signal_received_6 = 1;
-
-        // Return the difference in milliseconds
-        if (refMillis > 0) {
-            millisDif = millis() - refMillis;
-            refMillis = 0;
-        } else { 
-            refMillis = millis(); // If signal is for sending record start time
-        }
     }
 #else
     const char* signal_received_6 = "N/A";
@@ -173,7 +130,6 @@ void reset_signal_variables() {
     #ifdef NODE_1
     if (signal_received_1 == 1 && digitalRead(SIGNAL_PIN_1) == 1) {
         signal_received_1 = 0;
-        initialMillis = 0;
         Serial.println("Line 1 reset");
     }
     #endif
@@ -202,6 +158,7 @@ void reset_signal_variables() {
     #ifdef NODE_5
     if (signal_received_5 == 1 && digitalRead(SIGNAL_PIN_5) == 1) {
         signal_received_5 = 0;
+
         Serial.println("Line 5 reset");
     }
     #endif
@@ -209,6 +166,7 @@ void reset_signal_variables() {
     #ifdef NODE_6
     if (signal_received_6 == 1 && digitalRead(SIGNAL_PIN_6) == 1) {
         signal_received_6 = 0;
+        
         Serial.println("Line 6 reset");
     }
     #endif
@@ -216,7 +174,7 @@ void reset_signal_variables() {
 
 String get_ina_data() {
     float power_data[NUM_NODES * 5];  // Initialize the power_data array
-    int curTime = millis() - initialMillis;
+    
 
     int index = 0;  // Index to track position in the power_data array
 
@@ -283,10 +241,6 @@ String get_ina_data() {
     row += "\n";
     
     // Serial.println(row);
-
-    if (millisDif > 0) {
-        millisDif = 0;
-    } 
 
     return row;
 }
@@ -398,9 +352,15 @@ void setup() {
 
 int loop_count = 0;
 String data = "";
+
 void loop() {
+    int curTime = millis() - initialMillis;
+    if (curTime < 10) {
+      last_signal_millis = 0;
+    }
     String row = get_ina_data();
     data = data + row;
+
     
     if (loop_count == 10) {
         const char* data_c_str = data.c_str();
@@ -408,6 +368,7 @@ void loop() {
     }
     
     reset_signal_variables();
+
     loop_count++;
     delay(2);
 }
