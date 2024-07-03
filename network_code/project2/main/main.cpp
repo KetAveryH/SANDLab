@@ -138,11 +138,11 @@ public:
     }
     else if (value == "TRAIN")
     {
-      gpio_set_level(SIGNAL_PIN, 0);  
+      gpio_set_level(SIGNAL_PIN, 1);  
       printf("GPIO SET LEVEL BACK TO 0\n");    
-      vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
+      // vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
       printf("GPIO SET LEVEL BACK TO 1\n");
-      gpio_set_level(SIGNAL_PIN, 1);
+      gpio_set_level(SIGNAL_PIN, 0);
 
       for (const auto &val : values)
       {
@@ -411,7 +411,11 @@ void sendDataChunks(int16_t *intermediates, size_t num_values)
     printf("Sent TRAIN\n");
     sendData("UART", "Sent TRAIN");
 
-    //Set to high
+    //Set to low
+    gpio_set_level(SIGNAL_PIN, 0);      
+    printf("GPIO SET LEVEL BACK TO 0\n");
+    // vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
+    printf("GPIO SET LEVEL BACK TO 1\n");
     gpio_set_level(SIGNAL_PIN, 1);
 
     size_t after_send_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
@@ -523,7 +527,7 @@ void app_main(void)
 
   // CONFIGURE SIGNAL PIN
   configure_gpio();
-  gpio_set_level(SIGNAL_PIN, 1);
+  gpio_set_level(SIGNAL_PIN, 1); // Initial starting thing
 
   // SERVER
   serverSetUp();

@@ -231,12 +231,6 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks
 void sendDataChunks(int16_t *intermediates, size_t num_values)
 {
     sendData("UART", "Starting to send data");
-
-    gpio_set_level(SIGNAL_PIN, 0);      
-    printf("GPIO SET LEVEL BACK TO 0\n");
-    vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
-    printf("GPIO SET LEVEL BACK TO 1\n");
-    gpio_set_level(SIGNAL_PIN, 1);
     
     auto start_time = std::chrono::high_resolution_clock::now();
     size_t chunk_size = (NimBLEDevice::getMTU() - 3 - sizeof(int64_t)) / 2; // Adjust based on actual MTU size
@@ -279,6 +273,10 @@ void sendDataChunks(int16_t *intermediates, size_t num_values)
     sendData("UART", "Sent TRAIN");
 
     //Set to high
+    gpio_set_level(SIGNAL_PIN, 0);      
+    printf("GPIO SET LEVEL BACK TO 0\n");
+    // vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
+    printf("GPIO SET LEVEL BACK TO 1\n");
     gpio_set_level(SIGNAL_PIN, 1);
 
     auto end_time = std::chrono::high_resolution_clock::now();
@@ -407,7 +405,7 @@ void app_main(void)
 
   // CONFIGURE SIGNAL PIN
   configure_gpio();
-  gpio_set_level(SIGNAL_PIN, 1);
+  gpio_set_level(SIGNAL_PIN, 0);
 
   // MODEL
   modelSetUp();
