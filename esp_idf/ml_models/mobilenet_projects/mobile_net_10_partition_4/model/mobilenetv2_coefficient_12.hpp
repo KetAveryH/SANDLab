@@ -230,30 +230,30 @@ namespace mobilenetv2_coefficient_12
     const dl::Filter<int16_t> *get_model_2_conv2d_103_conv2d_filter();
     const dl::Bias<int16_t> *get_model_2_conv2d_103_conv2d_bias();
     
-    // 49
-    const dl::Filter<int16_t> *get_model_2_conv2d_104_conv2d_filter();
-    const dl::Bias<int16_t> *get_model_2_conv2d_104_conv2d_bias();
-    const dl::Activation<int16_t> *get_model_2_conv2d_104_conv2d_activation();
+    // // 49
+    // const dl::Filter<int16_t> *get_model_2_conv2d_104_conv2d_filter();
+    // const dl::Bias<int16_t> *get_model_2_conv2d_104_conv2d_bias();
+    // const dl::Activation<int16_t> *get_model_2_conv2d_104_conv2d_activation();
     
-    // 50
-    const dl::Filter<int16_t> *get_model_2_depthwise_conv2d_50_depthwise_filter();
-    const dl::Bias<int16_t> *get_model_2_depthwise_conv2d_50_depthwise_bias();
-    const dl::Activation<int16_t> *get_model_2_depthwise_conv2d_50_depthwise_activation();
+    // // 50
+    // const dl::Filter<int16_t> *get_model_2_depthwise_conv2d_50_depthwise_filter();
+    // const dl::Bias<int16_t> *get_model_2_depthwise_conv2d_50_depthwise_bias();
+    // const dl::Activation<int16_t> *get_model_2_depthwise_conv2d_50_depthwise_activation();
     
-    // 51
-    const dl::Filter<int16_t> *get_model_2_conv2d_105_conv2d_filter();
-    const dl::Bias<int16_t> *get_model_2_conv2d_105_conv2d_bias();
+    // // 51
+    // const dl::Filter<int16_t> *get_model_2_conv2d_105_conv2d_filter();
+    // const dl::Bias<int16_t> *get_model_2_conv2d_105_conv2d_bias();
     
-    // 52
-    const dl::Filter<int16_t> *get_model_2_conv2d_106_conv2d_filter();
-    const dl::Bias<int16_t> *get_model_2_conv2d_106_conv2d_bias();
-    const dl::Activation<int16_t> *get_model_2_conv2d_106_conv2d_activation();
+    // // 52
+    // const dl::Filter<int16_t> *get_model_2_conv2d_106_conv2d_filter();
+    // const dl::Bias<int16_t> *get_model_2_conv2d_106_conv2d_bias();
+    // const dl::Activation<int16_t> *get_model_2_conv2d_106_conv2d_activation();
     
-    // 53
-    const dl::Filter<int16_t> *get_model_2_conv2d_107_biasadd_filter();
-    const dl::Bias<int16_t> *get_model_2_conv2d_107_biasadd_bias();
+    // // 53
+    // const dl::Filter<int16_t> *get_model_2_conv2d_107_biasadd_filter();
+    // const dl::Bias<int16_t> *get_model_2_conv2d_107_biasadd_bias();
     
-    // 54
-    const dl::Filter<int16_t> *get_fused_gemm_0_filter();
-    const dl::Bias<int16_t> *get_fused_gemm_0_bias();
+    // // 54
+    // const dl::Filter<int16_t> *get_fused_gemm_0_filter();
+    // const dl::Bias<int16_t> *get_fused_gemm_0_bias();
 }

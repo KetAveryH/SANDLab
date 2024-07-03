@@ -97,18 +97,18 @@ private:
     DepthwiseConv2D<int16_t> l56;  // model_2/depthwise_conv2d_49/depthwise, output_exponent: -9
     Conv2D<int16_t> l57;  // model_2/conv2d_103/Conv2D, output_exponent: -9
 
-    Add2D<int16_t> l58;  // model_2/add_29/add, output_exponent: -8
+    // Add2D<int16_t> l58;  // model_2/add_29/add, output_exponent: -8
 
-    Conv2D<int16_t> l59;  // model_2/conv2d_104/Conv2D, output_exponent: -9
-    DepthwiseConv2D<int16_t> l60;  // model_2/depthwise_conv2d_50/depthwise, output_exponent: -8
-    Conv2D<int16_t> l61;  // model_2/conv2d_105/Conv2D, output_exponent: -8
-    Conv2D<int16_t> l62;  // model_2/conv2d_106/Conv2D, output_exponent: -8
+    // Conv2D<int16_t> l59;  // model_2/conv2d_104/Conv2D, output_exponent: -9
+    // DepthwiseConv2D<int16_t> l60;  // model_2/depthwise_conv2d_50/depthwise, output_exponent: -8
+    // Conv2D<int16_t> l61;  // model_2/conv2d_105/Conv2D, output_exponent: -8
+    // Conv2D<int16_t> l62;  // model_2/conv2d_106/Conv2D, output_exponent: -8
 
-    GlobalAveragePool2D<int16_t> l63;  // model_2/global_average_pooling2d_2/Mean, output_exponent: -8
-    Reshape<int16_t> l64;  // model_2/global_average_pooling2d_2/Mean_Squeeze__559, output_exponent: -8
-    Conv2D<int16_t> l65;  // model_2/conv2d_107/BiasAdd, output_exponent: -9
+    // GlobalAveragePool2D<int16_t> l63;  // model_2/global_average_pooling2d_2/Mean, output_exponent: -8
+    // Reshape<int16_t> l64;  // model_2/global_average_pooling2d_2/Mean_Squeeze__559, output_exponent: -8
+    // Conv2D<int16_t> l65;  // model_2/conv2d_107/BiasAdd, output_exponent: -9
 
-    Flatten<int16_t> l66;  // model_2/flatten_2/Reshape, output_exponent: -9
+    // Flatten<int16_t> l66;  // model_2/flatten_2/Reshape, output_exponent: -9
     
 
 
@@ -121,7 +121,7 @@ private:
 
 
 public:
-    FullyConnected<int16_t> l67;  // fused_gemm_0, output_exponent: -10
+    Add2D<int16_t> l58;  // fused_gemm_0, output_exponent: -10
 
     /**
      * @brief Initialize layers in constructor function
@@ -206,20 +206,20 @@ public:
         l56(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_49_depthwise_filter(), get_model_2_depthwise_conv2d_49_depthwise_bias(), get_model_2_depthwise_conv2d_49_depthwise_activation(), PADDING_SAME_END, {1,1,1,1}, 1,1)),
         l57(Conv2D<int16_t>(-9, get_model_2_conv2d_103_conv2d_filter(), get_model_2_conv2d_103_conv2d_bias(), NULL ,PADDING_SAME_END, {0,0,0,0}, 1,1)),
 
-        l58(Add2D<int16_t>(-8, NULL)),
+        l58(Add2D<int16_t>(-8, NULL)){}
 
-        l59(Conv2D<int16_t>(-9, get_model_2_conv2d_104_conv2d_filter(), get_model_2_conv2d_104_conv2d_bias(), get_model_2_conv2d_104_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
-        l60(DepthwiseConv2D<int16_t>(-8, get_model_2_depthwise_conv2d_50_depthwise_filter(), get_model_2_depthwise_conv2d_50_depthwise_bias(), get_model_2_depthwise_conv2d_50_depthwise_activation(), PADDING_SAME_END, {1,1,1,1}, 1,1)),
-        l61(Conv2D<int16_t>(-8, get_model_2_conv2d_105_conv2d_filter(), get_model_2_conv2d_105_conv2d_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
-        l62(Conv2D<int16_t>(-8, get_model_2_conv2d_106_conv2d_filter(), get_model_2_conv2d_106_conv2d_bias(), get_model_2_conv2d_106_conv2d_activation(), PADDING_SAME_END, {} ,1,1)),
+        // l59(Conv2D<int16_t>(-9, get_model_2_conv2d_104_conv2d_filter(), get_model_2_conv2d_104_conv2d_bias(), get_model_2_conv2d_104_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
+        // l60(DepthwiseConv2D<int16_t>(-8, get_model_2_depthwise_conv2d_50_depthwise_filter(), get_model_2_depthwise_conv2d_50_depthwise_bias(), get_model_2_depthwise_conv2d_50_depthwise_activation(), PADDING_SAME_END, {1,1,1,1}, 1,1)),
+        // l61(Conv2D<int16_t>(-8, get_model_2_conv2d_105_conv2d_filter(), get_model_2_conv2d_105_conv2d_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
+        // l62(Conv2D<int16_t>(-8, get_model_2_conv2d_106_conv2d_filter(), get_model_2_conv2d_106_conv2d_bias(), get_model_2_conv2d_106_conv2d_activation(), PADDING_SAME_END, {} ,1,1)),
 
-        l63(GlobalAveragePool2D<int16_t>(-8)),  // GlobalAveragePool
-        l64(Reshape<int16_t>({1, 1, 1280})),  // Squeeze  // Squeeze: remove all singleton dimensions
-        l65(Conv2D<int16_t>(-9, get_model_2_conv2d_107_biasadd_filter(), get_model_2_conv2d_107_biasadd_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
-        l66(Flatten<int16_t>()),  // Flatten
+        // l63(GlobalAveragePool2D<int16_t>(-8)),  // GlobalAveragePool
+        // l64(Reshape<int16_t>({1, 1, 1280})),  // Squeeze  // Squeeze: remove all singleton dimensions
+        // l65(Conv2D<int16_t>(-9, get_model_2_conv2d_107_biasadd_filter(), get_model_2_conv2d_107_biasadd_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
+        // l66(Flatten<int16_t>()),  // Flatten
 
-        l67(FullyConnected<int16_t>(-10, get_fused_gemm_0_filter(), get_fused_gemm_0_bias(), NULL))   // Fully Connected
-    {}
+        // l67(FullyConnected<int16_t>(-10, get_fused_gemm_0_filter(), get_fused_gemm_0_bias(), NULL))   // Fully Connected
+    
 
 /**
  * @brief call each layers' build(...) function in sequence
@@ -465,41 +465,41 @@ void build(Tensor<int16_t> &input)
     shape = this->l58.get_output().shape;
     std::cout << "After l58 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l59.build(this->l58.get_output());
-    shape = this->l59.get_output().shape;
-    std::cout << "After l59 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l59.build(this->l58.get_output());
+    // shape = this->l59.get_output().shape;
+    // std::cout << "After l59 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l60.build(this->l59.get_output());
-    shape = this->l60.get_output().shape;
-    std::cout << "After l60 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l60.build(this->l59.get_output());
+    // shape = this->l60.get_output().shape;
+    // std::cout << "After l60 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l61.build(this->l60.get_output());
-    shape = this->l61.get_output().shape;
-    std::cout << "After l61 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l61.build(this->l60.get_output());
+    // shape = this->l61.get_output().shape;
+    // std::cout << "After l61 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l62.build(this->l61.get_output());
-    shape = this->l62.get_output().shape;
-    std::cout << "After l62 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l62.build(this->l61.get_output());
+    // shape = this->l62.get_output().shape;
+    // std::cout << "After l62 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l63.build(this->l62.get_output());
-    shape = this->l63.get_output().shape;
-    std::cout << "After l63 (GlobalAveragePool): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l63.build(this->l62.get_output());
+    // shape = this->l63.get_output().shape;
+    // std::cout << "After l63 (GlobalAveragePool): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l64.build(this->l63.get_output());
-    shape = this->l64.get_output().shape;
-    std::cout << "After l64 (Squeeze): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l64.build(this->l63.get_output());
+    // shape = this->l64.get_output().shape;
+    // std::cout << "After l64 (Squeeze): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l65.build(this->l64.get_output());
-    shape = this->l65.get_output().shape;
-    std::cout << "After l65 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l65.build(this->l64.get_output());
+    // shape = this->l65.get_output().shape;
+    // std::cout << "After l65 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l66.build(this->l65.get_output());
-    shape = this->l66.get_output().shape;
-    std::cout << "After l66 (Flatten): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l66.build(this->l65.get_output());
+    // shape = this->l66.get_output().shape;
+    // std::cout << "After l66 (Flatten): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l67.build(this->l66.get_output());
-    shape = this->l67.get_output().shape;
-    std::cout << "After l67 (FullyConnected): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l67.build(this->l66.get_output());
+    // shape = this->l67.get_output().shape;
+    // std::cout << "After l67 (FullyConnected): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 }
 
 
@@ -686,32 +686,32 @@ void call(Tensor<int16_t> &input)
     this->l54.get_output().free_element();
     this->l57.get_output().free_element();
 
-    this->l59.call(this->l58.get_output());
-    this->l58.get_output().free_element();
+    // this->l59.call(this->l58.get_output());
+    // this->l58.get_output().free_element();
 
-    this->l60.call(this->l59.get_output());
-    this->l59.get_output().free_element();
+    // this->l60.call(this->l59.get_output());
+    // this->l59.get_output().free_element();
 
-    this->l61.call(this->l60.get_output());
-    this->l60.get_output().free_element();
+    // this->l61.call(this->l60.get_output());
+    // this->l60.get_output().free_element();
 
-    this->l62.call(this->l61.get_output());
-    this->l61.get_output().free_element();
+    // this->l62.call(this->l61.get_output());
+    // this->l61.get_output().free_element();
 
-    this->l63.call(this->l62.get_output());
-    this->l62.get_output().free_element();
+    // this->l63.call(this->l62.get_output());
+    // this->l62.get_output().free_element();
 
-    this->l64.call(this->l63.get_output());
-    this->l63.get_output().free_element();
+    // this->l64.call(this->l63.get_output());
+    // this->l63.get_output().free_element();
 
-    this->l65.call(this->l64.get_output());
-    this->l64.get_output().free_element();
+    // this->l65.call(this->l64.get_output());
+    // this->l64.get_output().free_element();
 
-    this->l66.call(this->l65.get_output());
-    this->l65.get_output().free_element();
+    // this->l66.call(this->l65.get_output());
+    // this->l65.get_output().free_element();
 
-    this->l67.call(this->l66.get_output());
-    this->l66.get_output().free_element();
+    // this->l67.call(this->l66.get_output());
+    // this->l66.get_output().free_element();
 }
 
 };
