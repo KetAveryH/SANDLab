@@ -99,7 +99,7 @@ private:
 
     // Add2D<int16_t> l58;  // model_2/add_29/add, output_exponent: -8
 
-    Conv2D<int16_t> l59;  // model_2/conv2d_104/Conv2D, output_exponent: -9
+    // Conv2D<int16_t> l59;  // model_2/conv2d_104/Conv2D, output_exponent: -9
     DepthwiseConv2D<int16_t> l60;  // model_2/depthwise_conv2d_50/depthwise, output_exponent: -8
     Conv2D<int16_t> l61;  // model_2/conv2d_105/Conv2D, output_exponent: -8
     Conv2D<int16_t> l62;  // model_2/conv2d_106/Conv2D, output_exponent: -8
@@ -108,7 +108,7 @@ private:
     Reshape<int16_t> l64;  // model_2/global_average_pooling2d_2/Mean_Squeeze__559, output_exponent: -8
     Conv2D<int16_t> l65;  // model_2/conv2d_107/BiasAdd, output_exponent: -9
 
-    Flatten<int16_t> l66;  // model_2/flatten_2/Reshape, output_exponent: -9
+    Reshape<int16_t> l66;  // model_2/flatten_2/Reshape, output_exponent: -9
     
 
 
@@ -208,17 +208,17 @@ public:
 
         // l58(Add2D<int16_t>(-8, NULL)),
 
-        l59(Conv2D<int16_t>(-9, get_model_2_conv2d_104_conv2d_filter(), get_model_2_conv2d_104_conv2d_bias(), get_model_2_conv2d_104_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
+        // l59(Conv2D<int16_t>(-9, get_model_2_conv2d_104_conv2d_filter(), get_model_2_conv2d_104_conv2d_bias(), get_model_2_conv2d_104_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
         l60(DepthwiseConv2D<int16_t>(-8, get_model_2_depthwise_conv2d_50_depthwise_filter(), get_model_2_depthwise_conv2d_50_depthwise_bias(), get_model_2_depthwise_conv2d_50_depthwise_activation(), PADDING_SAME_END, {1,1,1,1}, 1,1)),
         l61(Conv2D<int16_t>(-8, get_model_2_conv2d_105_conv2d_filter(), get_model_2_conv2d_105_conv2d_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
-        l62(Conv2D<int16_t>(-8, get_model_2_conv2d_106_conv2d_filter(), get_model_2_conv2d_106_conv2d_bias(), get_model_2_conv2d_106_conv2d_activation(), PADDING_SAME_END, {} ,1,1)),
+        l62(Conv2D<int16_t>(-8, get_model_2_conv2d_106_conv2d_filter(), get_model_2_conv2d_106_conv2d_bias(), get_model_2_conv2d_106_conv2d_activation(), PADDING_VALID, {} ,1,1)),
 
         l63(GlobalAveragePool2D<int16_t>(-8)),  // GlobalAveragePool
         l64(Reshape<int16_t>({1, 1, 1280})),  // Squeeze  // Squeeze: remove all singleton dimensions
         l65(Conv2D<int16_t>(-9, get_model_2_conv2d_107_biasadd_filter(), get_model_2_conv2d_107_biasadd_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
-        l66(Flatten<int16_t>()),  // Flatten
+        l66(Reshape<int16_t>({10})),  // Flatten
 
-        l67(FullyConnected<int16_t>(-10, get_fused_gemm_0_filter(), get_fused_gemm_0_bias(), NULL))   // Fully Connected
+        l67(FullyConnected<int16_t>(-10, get_fused_gemm_0_filter(), get_fused_gemm_0_bias(), NULL, true))   // Fully Connected
     {}
 
 /**
@@ -233,8 +233,8 @@ void build(Tensor<int16_t> &input)
 
 
 
-    this->l59.build(input);
-    shape = this->l59.get_output().shape;
+    this->l60.build(input);
+    shape = this->l60.get_output().shape;
     std::cout << "After l59 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
     // this->l2.build(this->l1.get_output());
@@ -469,9 +469,9 @@ void build(Tensor<int16_t> &input)
     // shape = this->l59.get_output().shape;
     // std::cout << "After l59 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    this->l60.build(this->l59.get_output());
-    shape = this->l60.get_output().shape;
-    std::cout << "After l60 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    // this->l60.build(this->l59.get_output());
+    // shape = this->l60.get_output().shape;
+    // std::cout << "After l60 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
     this->l61.build(this->l60.get_output());
     shape = this->l61.get_output().shape;
@@ -510,7 +510,7 @@ void build(Tensor<int16_t> &input)
  */
 void call(Tensor<int16_t> &input)
 {
-    this->l59.call(input);
+    this->l60.call(input);
     input.free_element();
 
     // this->l2.call(this->l1.get_output());
@@ -689,8 +689,8 @@ void call(Tensor<int16_t> &input)
     // this->l59.call(this->l58.get_output());
     // this->l58.get_output().free_element();
 
-    this->l60.call(this->l59.get_output());
-    this->l59.get_output().free_element();
+    // this->l60.call(this->l59.get_output());
+    // this->l59.get_output().free_element();
 
     this->l61.call(this->l60.get_output());
     this->l60.get_output().free_element();

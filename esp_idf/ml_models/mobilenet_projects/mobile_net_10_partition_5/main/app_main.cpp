@@ -15,8 +15,8 @@ extern "C" void app_main(void)
 
     int input_height = 7;
     int input_width = 7;
-    int input_channel = 160;
-    int input_exponent = -9;
+    int input_channel = 960;
+    int input_exponent = -8;
     int16_t *model_input = (int16_t *)dl::tool::malloc_aligned_prefer(input_height*input_width*input_channel, sizeof(int16_t *));
     for(int i=0 ;i<input_height*input_width*input_channel; i++){
         float normalized_input = example_element[i];
@@ -24,21 +24,43 @@ extern "C" void app_main(void)
     } 
 
     Tensor<int16_t> input;
-    input.set_element((int16_t *)model_input).set_exponent(input_exponent).set_shape({7, 7, 160}).set_auto_free(false);
+    input.set_element((int16_t *)model_input).set_exponent(input_exponent).set_shape({7, 7, 960}).set_auto_free(false);
 
     MNIST model;
 
     dl::tool::Latency latency;
 
-    // model forward
+    // Model build
     latency.start();
-    
-    model.forward(input);
-    // model.build(input);
+    model.build(input);  // build method likely returns void
+    latency.end();
+    latency.print("MobileNetV2", "build");
+
+    // Model forward
+    latency.start();
+    model.forward(input);  // forward method likely returns void
     latency.end();
     latency.print("MobileNetV2", "forward");
+    // model.l67.get_output().print_all();
+    free(model_input);
 
     // parse
+        // parse
+    int16_t *score = model.l67.get_output().get_element_ptr(); // assuming l10 is the final layer
+    int16_t max_score = score[0];
+    int max_index = 0;
+    printf("%d, ", max_score);
+
+    for (size_t i = 1; i < 10; i++)
+    {
+        printf("%d, ", score[i]);
+        if (score[i] > max_score)
+        {
+            max_score = score[i];
+            max_index = i;
+        }
+    }
+    printf("\nPrediction Result: %d\n", max_index);
 
 
     // esp32s3

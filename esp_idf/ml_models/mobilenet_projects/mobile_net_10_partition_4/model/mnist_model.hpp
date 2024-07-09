@@ -97,7 +97,7 @@ private:
     DepthwiseConv2D<int16_t> l56;  // model_2/depthwise_conv2d_49/depthwise, output_exponent: -9
     Conv2D<int16_t> l57;  // model_2/conv2d_103/Conv2D, output_exponent: -9
 
-    // Add2D<int16_t> l58;  // model_2/add_29/add, output_exponent: -8
+    Add2D<int16_t> l58;  // model_2/add_29/add, output_exponent: -8
 
     // Conv2D<int16_t> l59;  // model_2/conv2d_104/Conv2D, output_exponent: -9
     // DepthwiseConv2D<int16_t> l60;  // model_2/depthwise_conv2d_50/depthwise, output_exponent: -8
@@ -121,7 +121,7 @@ private:
 
 
 public:
-    Add2D<int16_t> l58;  // fused_gemm_0, output_exponent: -10
+    Conv2D<int16_t> l59;  // fused_gemm_0, output_exponent: -10
 
     /**
      * @brief Initialize layers in constructor function
@@ -206,9 +206,9 @@ public:
         l56(DepthwiseConv2D<int16_t>(-9, get_model_2_depthwise_conv2d_49_depthwise_filter(), get_model_2_depthwise_conv2d_49_depthwise_bias(), get_model_2_depthwise_conv2d_49_depthwise_activation(), PADDING_SAME_END, {1,1,1,1}, 1,1)),
         l57(Conv2D<int16_t>(-9, get_model_2_conv2d_103_conv2d_filter(), get_model_2_conv2d_103_conv2d_bias(), NULL ,PADDING_SAME_END, {0,0,0,0}, 1,1)),
 
-        l58(Add2D<int16_t>(-8, NULL)){}
+        l58(Add2D<int16_t>(-8, NULL)),
 
-        // l59(Conv2D<int16_t>(-9, get_model_2_conv2d_104_conv2d_filter(), get_model_2_conv2d_104_conv2d_bias(), get_model_2_conv2d_104_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
+        l59(Conv2D<int16_t>(-9, get_model_2_conv2d_104_conv2d_filter(), get_model_2_conv2d_104_conv2d_bias(), get_model_2_conv2d_104_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)){}
         // l60(DepthwiseConv2D<int16_t>(-8, get_model_2_depthwise_conv2d_50_depthwise_filter(), get_model_2_depthwise_conv2d_50_depthwise_bias(), get_model_2_depthwise_conv2d_50_depthwise_activation(), PADDING_SAME_END, {1,1,1,1}, 1,1)),
         // l61(Conv2D<int16_t>(-8, get_model_2_conv2d_105_conv2d_filter(), get_model_2_conv2d_105_conv2d_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
         // l62(Conv2D<int16_t>(-8, get_model_2_conv2d_106_conv2d_filter(), get_model_2_conv2d_106_conv2d_bias(), get_model_2_conv2d_106_conv2d_activation(), PADDING_SAME_END, {} ,1,1)),
@@ -465,9 +465,9 @@ void build(Tensor<int16_t> &input)
     shape = this->l58.get_output().shape;
     std::cout << "After l58 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
-    // this->l59.build(this->l58.get_output());
-    // shape = this->l59.get_output().shape;
-    // std::cout << "After l59 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    this->l59.build(this->l58.get_output());
+    shape = this->l59.get_output().shape;
+    std::cout << "After l59 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
     // this->l60.build(this->l59.get_output());
     // shape = this->l60.get_output().shape;
@@ -686,8 +686,8 @@ void call(Tensor<int16_t> &input)
     this->l54.get_output().free_element();
     this->l57.get_output().free_element();
 
-    // this->l59.call(this->l58.get_output());
-    // this->l58.get_output().free_element();
+    this->l59.call(this->l58.get_output());
+    this->l58.get_output().free_element();
 
     // this->l60.call(this->l59.get_output());
     // this->l59.get_output().free_element();
