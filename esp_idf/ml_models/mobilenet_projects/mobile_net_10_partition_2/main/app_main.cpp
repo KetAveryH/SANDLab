@@ -42,6 +42,7 @@ extern "C" void app_main(void)
     model.forward(input);  // forward method likely returns void
     latency.end();
     latency.print("MobileNetV2", "forward");
+    model.l37.get_output().print_all();
     free(model_input);
 
     // parse

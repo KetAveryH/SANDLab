@@ -15,7 +15,7 @@ extern "C" void app_main(void)
 
     int input_height = 14;
     int input_width = 14;
-    int input_channel = 64;
+    int input_channel = 384;
     int input_exponent = -10;
     int16_t *model_input = (int16_t *)dl::tool::malloc_aligned_prefer(input_height*input_width*input_channel, sizeof(int16_t *));
     for(int i=0 ;i<input_height*input_width*input_channel; i++){
@@ -24,7 +24,7 @@ extern "C" void app_main(void)
     } 
 
     Tensor<int16_t> input;
-    input.set_element((int16_t *)model_input).set_exponent(input_exponent).set_shape({14, 14, 64}).set_auto_free(false);
+    input.set_element((int16_t *)model_input).set_exponent(input_exponent).set_shape({14, 14, 384}).set_auto_free(false);
 
     MNIST model;
 
@@ -41,7 +41,7 @@ extern "C" void app_main(void)
     model.forward(input);  // forward method likely returns void
     latency.end();
     latency.print("MobileNetV2", "forward");
-    // model.l49.get_output().print_all();
+    model.l49.get_output().print_all();
     free(model_input);
 
     // parse
