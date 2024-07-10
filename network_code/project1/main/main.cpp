@@ -10,6 +10,7 @@
 #include "esp_system.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_spiffs.h"
 #include "esp_log.h"
 #include "driver/uart.h"
 #include "string.h"
@@ -17,9 +18,10 @@
 
 #include "dl_tool.hpp"
 #include "../model/mnist_model.hpp"
+#include "church.h"
 
 // UART Variables
-static const int RX_BUF_SIZE = 1024;
+static const int RX_BUF_SIZE = 516;
 #define TXD_PIN (GPIO_NUM_21)
 #define RXD_PIN (GPIO_NUM_47)
 #define SIGNAL_PIN GPIO_NUM_4
@@ -239,6 +241,13 @@ void sendDataChunks(int16_t *intermediates, size_t num_values)
     printf("Free heap memory before sending: %d bytes\n", before_send_free_heap);
 
     timer_id_counter = 0;
+
+    //Set to low
+    gpio_set_level(SIGNAL_PIN, 0);      
+    printf("GPIO SET LEVEL BACK TO 0\n");
+    // vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
+    printf("GPIO SET LEVEL BACK TO 1\n");
+    gpio_set_level(SIGNAL_PIN, 1);
     for (size_t i = 0; i < num_values; i += chunk_size)
     {
         size_t remaining = num_values - i;
@@ -266,18 +275,12 @@ void sendDataChunks(int16_t *intermediates, size_t num_values)
             printf("Failed to write characteristic\n");
             return;
         }
+        vTaskDelay(80 / portTICK_PERIOD_MS);
     }
 
     const char *buf = "TRAIN";
     pRemoteCharacteristic->writeValue((uint8_t *)buf, strlen(buf), false);
     sendData("UART", "Sent TRAIN");
-
-    //Set to high
-    gpio_set_level(SIGNAL_PIN, 0);      
-    printf("GPIO SET LEVEL BACK TO 0\n");
-    // vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
-    printf("GPIO SET LEVEL BACK TO 1\n");
-    gpio_set_level(SIGNAL_PIN, 1);
 
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
@@ -288,6 +291,8 @@ void sendDataChunks(int16_t *intermediates, size_t num_values)
 
     size_t memory_used_for_sending = before_send_free_heap - after_send_free_heap;
     printf("Memory used for sending: %d bytes\n", memory_used_for_sending);
+
+    printf("Sent this many bytes: %zu\n", sizeOfTensor);
 }
 
 // Connect to server
@@ -302,6 +307,7 @@ void connectTask(void *parameter)
         printf("We are now connected to the BLE Server.\n");
         // Send the data in chunks
         sendDataChunks(nums_to_send, sizeOfTensor);
+        
       }
       else
       {
@@ -351,8 +357,6 @@ void clientSetUp(void)
   sendData("UART", "Client End");
 }
 
-__attribute__((aligned(16))) int16_t example_element[] = {};
-
 void modelSetUp(void)
 {
   printf("Model Start\n");
@@ -360,15 +364,54 @@ void modelSetUp(void)
 
   auto start_time = std::chrono::high_resolution_clock::now();
 
-  int input_height = 224; //changed
-  int input_width = 224; //changed
-  int input_channel = 3; //changed
-  int input_exponent = -15; // to change and below
-  int16_t *model_input = (int16_t *)dl::tool::malloc_aligned_prefer(input_height*input_width*input_channel, sizeof(int16_t *));
-  for(int i=0 ;i<input_height*input_width*input_channel; i++){
+  // Mount SPIFFS
+  esp_vfs_spiffs_conf_t conf = {
+      .base_path = "/spiffs",
+      .partition_label = NULL,
+      .max_files = 5,
+      .format_if_mount_failed = true
+  };
+
+  esp_err_t ret = esp_vfs_spiffs_register(&conf);
+  if (ret != ESP_OK) {
+      if (ret == ESP_FAIL) {
+          printf("Failed to mount or format filesystem\n");
+      } else if (ret == ESP_ERR_NOT_FOUND) {
+          printf("Failed to find SPIFFS partition\n");
+      } else {
+          printf("Failed to initialize SPIFFS (%s)\n", esp_err_to_name(ret));
+      }
+      return;
+  }
+
+  size_t total = 0, used = 0;
+  ret = esp_spiffs_info(NULL, &total, &used);
+  if (ret != ESP_OK) {
+      printf("Failed to get SPIFFS partition information (%s)\n", esp_err_to_name(ret));
+  } else {
+      printf("Partition size: total: %d, used: %d\n", total, used);
+  }
+
+  // Allocate and initialize the example_element array
+  allocate_example_element();
+
+  // Input
+  int input_height = 224;
+  int input_width = 224;
+  int input_channel = 3;
+  int input_exponent = -15;
+  int total_elements = input_height * input_width * input_channel;
+  int16_t *model_input = (int16_t *)dl::tool::malloc_aligned_prefer(total_elements, sizeof(int16_t));
+
+  if (model_input == NULL) {
+      printf("Failed to allocate memory for model input\n");
+      return;
+  }
+
+  for (int i = 0; i < total_elements; i++) {
       float normalized_input = (example_element[i] / 127.5) - 1;
       model_input[i] = (int16_t)DL_CLIP(normalized_input * (1 << -input_exponent), -32768, 32767);
-  } 
+  }
 
   Tensor<int16_t> input;
   input.set_element((int16_t *)model_input).set_exponent(input_exponent).set_shape({224, 224, 3}).set_auto_free(false);
@@ -377,18 +420,27 @@ void modelSetUp(void)
 
   dl::tool::Latency latency;
 
-  // model forward
+  // Model forward
   latency.start();
-
-  // Forward then building sometimes work or build and then
-  // model.build(input);
+  //model.build(input);
   model.forward(input);
+  latency.end();
+  latency.print("MobileNetV2", "forward");
 
-  // parse
-  Tensor<int16_t> &my_tensor = model.l23.get_output();
-  auto sizeOfTensor = my_tensor.get_size();
+  // Parse
+  Tensor<int16_t> &intermediates = model.l23.get_output();
+  
+  sizeOfTensor = intermediates.get_size();
+  printf("Size of Tensor: %zu\n", sizeOfTensor);
   // my_tensor.print_all();
-  auto nums_to_send = my_tensor.all_list();
+  nums_to_send = intermediates.all_list();
+
+  // Free the allocated memory for example_element
+  heap_caps_free(example_element);
+  free(model_input);
+
+  // Unmount SPIFFS
+  esp_vfs_spiffs_unregister(NULL);
 
   auto end_time = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);

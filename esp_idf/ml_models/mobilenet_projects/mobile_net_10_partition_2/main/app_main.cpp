@@ -31,13 +31,19 @@ extern "C" void app_main(void)
 
     dl::tool::Latency latency;
 
-    // model forward
+    // Model build
     latency.start();
-    
-    model.forward(input);
-    // model.build(input);
+    model.build(input);  // build method likely returns void
     latency.end();
-    latency.print("MNIST", "forward");
+    latency.print("MobileNetV2", "build");
+
+    // Model forward
+    latency.start();
+    model.forward(input);  // forward method likely returns void
+    latency.end();
+    latency.print("MobileNetV2", "forward");
+    model.l37.get_output().print_all();
+    free(model_input);
 
     // parse
 

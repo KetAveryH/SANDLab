@@ -231,9 +231,9 @@ namespace mobilenetv2_coefficient_12
     const dl::Bias<int16_t> *get_model_2_conv2d_103_conv2d_bias();
     
     // // 49
-    // const dl::Filter<int16_t> *get_model_2_conv2d_104_conv2d_filter();
-    // const dl::Bias<int16_t> *get_model_2_conv2d_104_conv2d_bias();
-    // const dl::Activation<int16_t> *get_model_2_conv2d_104_conv2d_activation();
+    const dl::Filter<int16_t> *get_model_2_conv2d_104_conv2d_filter();
+    const dl::Bias<int16_t> *get_model_2_conv2d_104_conv2d_bias();
+    const dl::Activation<int16_t> *get_model_2_conv2d_104_conv2d_activation();
     
     // // 50
     // const dl::Filter<int16_t> *get_model_2_depthwise_conv2d_50_depthwise_filter();
