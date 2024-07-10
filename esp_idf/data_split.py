@@ -3,7 +3,7 @@ import numpy as np
 import pyperclip
 
 # Load the image
-image_path = '/home/sand-lab-2024/Pictures/Screenshots/real_church.jpeg'
+image_path = '/home/sand-lab-2024/Pictures/Screenshots/please_work_chainsaw.jpeg'
 
 def img_to_cpp_array(image_path):
     # Load the image from the specified path
