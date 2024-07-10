@@ -14,7 +14,7 @@
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", 0, 60000);
-Adafruit_INA219 ina219(0x40);
+Adafruit_INA219 ina219_1(0x40);
 HardwareSerial SerialPort(1); // Creates an instance for UART1
 const int signalPin = 14;
 
@@ -53,7 +53,7 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
 
-  if (! ina219.begin()) {
+  if (! ina219_1.begin()) {
     Serial.println("Failed to find INA219 chip");
   }
 
@@ -95,10 +95,10 @@ void loop() {
   String currentTime = timeClient.getFormattedTime();
   // Serial.println(currentTime);
 
-  shuntvoltage = ina219.getShuntVoltage_mV();
-  busvoltage = ina219.getBusVoltage_V();
-  current_mA = ina219.getCurrent_mA();
-  power_mW = ina219.getPower_mW();
+  shuntvoltage = ina219_1.getShuntVoltage_mV();
+  busvoltage = ina219_1.getBusVoltage_V();
+  current_mA = ina219_1.getCurrent_mA();
+  power_mW = ina219_1.getPower_mW();
   loadvoltage = busvoltage + (shuntvoltage / 1000);
 
   String row = currentTime + ", " +

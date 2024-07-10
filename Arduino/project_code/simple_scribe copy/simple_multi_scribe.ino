@@ -21,9 +21,156 @@
 #define SD_MMC_CLK 39 //Please do not modify it. 
 #define SD_MMC_D0  40 //Please do not modify it.
 
-#define SIGNAL_PIN_1 4
-#define INA_ADDRESS_1_1 0x40
-Adafruit_INA219 ina219_1(INA_ADDRESS_1_1);
+///////////////////////////////////////////////////////////////////////////
+// Each of these represents an edge node performing inference. 
+// Uncomment the edge nodes you will be monitoring with an INA219
+
+#define NUM_NODES 6
+#define NODE_1
+#define NODE_2
+// #define NODE_3
+// #define NODE_4
+// #define NODE_5
+// #define NODE_6
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
+// INA219's have a max of 4 distinguishable addresses per SDA and SCL pair (I2C line)
+// When wiring up your scribe to the following nodes, set connect pins 47 and 21 to SDA and SCL lines respectively
+#ifdef NODE_1
+    #define SIGNAL_PIN_1 4
+    #define INA_ADDRESS_1_1 0x40
+    Adafruit_INA219 ina219_1_1(INA_ADDRESS_1_1);
+    volatile int rise_1 = 0;
+    volatile int fall_1 = 0;
+    uint16_t riseMillis_1 = 0;
+    uint16_t fallMillis_1 = 0;
+
+    void IRAM_ATTR signal1ISR() {  // ISR function ensures that on falling edge of the signal pin, the data is recorded
+      // Check the state of pin 4
+      if (digitalRead(4) == HIGH) {
+          rise_1 = 1;
+      } 
+      if (digitalRead(4) == LOW) {
+          fall_1 = 1;
+      }
+    }
+#else
+    // const char* signal_received_1 = "N/A";
+#endif
+
+#ifdef NODE_2
+    #define SIGNAL_PIN_2 5
+    #define INA_ADDRESS_1_2 0x41
+    Adafruit_INA219 ina219_1_2(INA_ADDRESS_1_2);
+    volatile int rise_2 = 0;
+    volatile int fall_2 = 0;
+    uint16_t riseMillis_2 = 0;
+    uint16_t fallMillis_2 = 0;
+
+    void IRAM_ATTR signal2ISR() {  // ISR function ensures that on falling edge of the signal pin, the data is recorded
+      // Check the state of pin 4
+      if (digitalRead(4) == HIGH) {
+          rise_2 = 1;
+      } 
+      if (digitalRead(4) == LOW) {
+          fall_2 = 1;
+      }
+    }
+#else
+    // const char* signal_received_2 = "N/A"; TODO
+#endif
+
+#ifdef NODE_3
+    #define SIGNAL_PIN_3 6
+    #define INA_ADDRESS_1_3 0x44
+    Adafruit_INA219 ina219_1_3(INA_ADDRESS_1_3);
+    volatile int rise_3 = 0;
+    volatile int fall_3 = 0;
+    uint16_t riseMillis_3 = 0;
+    uint16_t fallMillis_3 = 0;
+
+    void IRAM_ATTR signal3ISR() {  // ISR function ensures that on falling edge of the signal pin, the data is recorded
+      // Check the state of pin 4
+      if (digitalRead(4) == HIGH) {
+          rise_3 = 1;
+      } 
+      if (digitalRead(4) == LOW) {
+          fall_3 = 1;
+      }
+    }
+#else
+    // const char* signal_received_3 = "N/A";
+#endif
+
+#ifdef NODE_4
+    #define SIGNAL_PIN_4 7
+    #define INA_ADDRESS_1_4 0x45
+    Adafruit_INA219 ina219_1_4(INA_ADDRESS_1_4);
+    volatile int rise_4 = 0;
+    volatile int fall_4 = 0;
+    uint16_t riseMillis_4 = 0;
+    uint16_t fallMillis_4 = 0;
+
+    void IRAM_ATTR signal4ISR() {  // ISR function ensures that on falling edge of the signal pin, the data is recorded
+      // Check the state of pin 4
+      if (digitalRead(4) == HIGH) {
+          rise_4 = 1;
+      } 
+      if (digitalRead(4) == LOW) {
+          fall_4 = 1;
+      }
+    }
+#else
+    // const char* signal_received_4 = "N/A";
+#endif
+
+// Use pins 42 and 41 for SDA and SCL lines respectively for devices below this point
+#ifdef NODE_5
+    #define SIGNAL_PIN_5 15
+    #define INA_ADDRESS_2_5 0x40
+    Adafruit_INA219 ina219_2_1(INA_ADDRESS_2_5);
+    volatile int rise_5 = 0;
+    volatile int fall_5 = 0;
+    uint16_t riseMillis_5 = 0;
+    uint16_t fallMillis_5 = 0;
+
+    void IRAM_ATTR signal5ISR() {  // ISR function ensures that on falling edge of the signal pin, the data is recorded
+      // Check the state of pin 4
+      if (digitalRead(4) == HIGH) {
+          rise_5 = 1;
+      } 
+      if (digitalRead(4) == LOW) {
+          fall_5 = 1;
+      }
+    }
+#else
+    // const char* signal_received_5 = "N/A";
+#endif
+
+#ifdef NODE_6
+    #define SIGNAL_PIN_6 16
+    #define INA_ADDRESS_2_6 0x41
+    Adafruit_INA219 ina219_2_2(INA_ADDRESS_2_6);
+    volatile int rise_6 = 0;
+    volatile int fall_6 = 0;
+    uint16_t riseMillis_6 = 0;
+    uint16_t fallMillis_6 = 0;
+
+    void IRAM_ATTR signal6ISR() {  // ISR function ensures that on falling edge of the signal pin, the data is recorded
+      // Check the state of pin 4
+      if (digitalRead(4) == HIGH) {
+          rise_6 = 1;
+      } 
+      if (digitalRead(4) == LOW) {
+          fall_6 = 1;
+      }
+    }
+#else
+    const char* signal_received_6 = "N/A";
+#endif
 
 #define TOUCH_THRESH 50000
 

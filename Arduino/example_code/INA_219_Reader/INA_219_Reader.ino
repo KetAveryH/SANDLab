@@ -1,7 +1,7 @@
 #include "Wire.h"
 #include "Adafruit_INA219.h"
 
-Adafruit_INA219 ina219(0x40);
+Adafruit_INA219 ina219_1(0x40);
 
 void setup() {
   // Open serial communications and wait for port to open:
@@ -11,7 +11,7 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
 
-  if (! ina219.begin()) {
+  if (! ina219_1.begin()) {
     Serial.println("Failed to find INA219 chip");
     while (1) { delay(10); }
   }
@@ -30,10 +30,10 @@ void loop() {
   float loadvoltage = 0;
   float power_mW = 0;
 
-  shuntvoltage = ina219.getShuntVoltage_mV();
-  busvoltage = ina219.getBusVoltage_V();
-  current_mA = ina219.getCurrent_mA();
-  power_mW = ina219.getPower_mW();
+  shuntvoltage = ina219_1.getShuntVoltage_mV();
+  busvoltage = ina219_1.getBusVoltage_V();
+  current_mA = ina219_1.getCurrent_mA();
+  power_mW = ina219_1.getPower_mW();
   loadvoltage = busvoltage + (shuntvoltage / 1000);
 
   Serial.print(busvoltage); Serial.print("\t"); 

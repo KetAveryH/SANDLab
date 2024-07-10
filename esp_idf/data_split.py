@@ -3,7 +3,7 @@ import numpy as np
 import pyperclip
 
 # Load the image
-image_path = 'images/n03028079_church.JPEG'
+image_path = 'images/real_church.JPEG'
 
 def img_to_cpp_array(image_path):
     image = Image.open(image_path)
@@ -27,5 +27,5 @@ def img_to_cpp_array(image_path):
     else:
         print("Aborted")
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     img_to_cpp_array(image_path)
