@@ -33,7 +33,7 @@ using namespace std::chrono;
 std::map<int, steady_clock::time_point> timers;
 int timer_id_counter = 0; // Global counter for generating unique IDs
 
-#define serverName "BLE SERVER 2"
+#define serverName "BLE SERVER 5"
 
 extern "C"
 {
@@ -91,8 +91,6 @@ int sendData(const char* logName, const char* data)
     return txBytes;
 }
 
-__attribute__((aligned(16))) int16_t example_element[] = {};
-
 // onWrite callbacks
 class MyCallbacks : public NimBLECharacteristicCallbacks
 {
@@ -104,7 +102,6 @@ public:
   void onWrite(NimBLECharacteristic *pCharacteristic, NimBLEConnInfo &connInfo) override
   {
     sendData("UART", "Got Data");
-    pCharacteristic->notify();
     size_t before_receive_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
     printf("Free heap memory before receiving: %d bytes\n", before_receive_free_heap);
 
@@ -139,27 +136,21 @@ public:
       printf("GPIO SET LEVEL BACK TO 1\n");
       gpio_set_level(SIGNAL_PIN, 0);
 
-      for (const auto &val : values)
-      {
-        printf("%d ", val);
-      }
-      printf("\n");
-
       auto start_time = std::chrono::high_resolution_clock::now();
 
       //PARTITION 5
       int input_height = 7;
       int input_width = 7;
-      int input_channel = 160;
-      int input_exponent = -9;
+      int input_channel = 960;
+      int input_exponent = -8;
       int16_t *model_input = (int16_t *)dl::tool::malloc_aligned_prefer(input_height*input_width*input_channel, sizeof(int16_t *));
       for(int i=0 ;i<input_height*input_width*input_channel; i++){
-          float normalized_input = example_element[i];
+          float normalized_input = values[i];
           model_input[i] = (int16_t)DL_CLIP(normalized_input * (1 << -input_exponent), -32768, 32767);
       } 
 
       Tensor<int16_t> input;
-      input.set_element((int16_t *)model_input).set_exponent(input_exponent).set_shape({7, 7, 160}).set_auto_free(false);
+      input.set_element((int16_t *)model_input).set_exponent(input_exponent).set_shape({7, 7, 960}).set_auto_free(false);
 
       MNIST model;
 
@@ -168,8 +159,8 @@ public:
       // model forward
       latency.start();
       
+      //model.build(input);
       model.forward(input);
-      // model.build(input);
       Tensor<int16_t> &my_tensor = model.l67.get_output();
       auto sizeOfTensor = my_tensor.get_size();
       // my_tensor.print_all();
@@ -178,27 +169,27 @@ public:
       latency.print("MobileNetV2", "forward");
 
       // // parse
-      // int16_t *score = model.l4.get_output().get_element_ptr();
-      // int16_t max_score = score[0];
-      // int max_index = 0;
-      // printf("%d, ", max_score);
+      int16_t *score = model.l67.get_output().get_element_ptr();
+      int16_t max_score = score[0];
+      int max_index = 0;
+      printf("%d, ", max_score);
 
-      // for (size_t i = 1; i < 10; i++)
-      // {
-      //   printf("%d, ", score[i]);
-      //   if (score[i] > max_score)
-      //   {
-      //     max_score = score[i];
-      //     max_index = i;
-      //   }
-      // }
-      // printf("\nPrediction Result: %d\n", max_index);
+      for (size_t i = 1; i < 10; i++)
+      {
+        printf("%d, ", score[i]);
+        if (score[i] > max_score)
+        {
+          max_score = score[i];
+          max_index = i;
+        }
+      }
+      printf("\nPrediction Result: %d\n", max_index);
 
       auto end_time = std::chrono::high_resolution_clock::now();
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
       std::cout << "Execution time: " << duration.count() << " ms" << std::endl;
 
-      values.clear();
+      free(model_input);
     }
 
     size_t after_receive_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);

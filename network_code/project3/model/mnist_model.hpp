@@ -69,7 +69,7 @@ private:
 
     // Add2D<int16_t> l36;  // model_2/add_25/add, output_exponent: -9
     
-    Conv2D<int16_t> l37;  // model_2/conv2d_92/Conv2D, output_exponent: -10
+    // Conv2D<int16_t> l37;  // model_2/conv2d_92/Conv2D, output_exponent: -10
     DepthwiseConv2D<int16_t> l38;  // model_2/depthwise_conv2d_44/depthwise, output_exponent: -10
     Conv2D<int16_t> l39;  // model_2/conv2d_93/Conv2D, output_exponent: -10
     Conv2D<int16_t> l40;  // model_2/conv2d_94/Conv2D, output_exponent: -10
@@ -178,7 +178,7 @@ public:
 
         // l36(Add2D<int16_t>(-9, NULL)),
         
-        l37(Conv2D<int16_t>(-10, get_model_2_conv2d_92_conv2d_filter(), get_model_2_conv2d_92_conv2d_bias(), get_model_2_conv2d_92_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
+        // l37(Conv2D<int16_t>(-10, get_model_2_conv2d_92_conv2d_filter(), get_model_2_conv2d_92_conv2d_bias(), get_model_2_conv2d_92_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
         l38(DepthwiseConv2D<int16_t>(-10, get_model_2_depthwise_conv2d_44_depthwise_filter(), get_model_2_depthwise_conv2d_44_depthwise_bias(), get_model_2_depthwise_conv2d_44_depthwise_activation(), PADDING_SAME_END, {1,1,1,1}, 1,1)),
         l39(Conv2D<int16_t>(-10, get_model_2_conv2d_93_conv2d_filter(), get_model_2_conv2d_93_conv2d_bias(), NULL, PADDING_SAME_END, {0,0,0,0}, 1,1)),
         l40(Conv2D<int16_t>(-10, get_model_2_conv2d_94_conv2d_filter(), get_model_2_conv2d_94_conv2d_bias(), get_model_2_conv2d_94_conv2d_activation(), PADDING_SAME_END, {0,0,0,0}, 1,1)),
@@ -376,13 +376,13 @@ void build(Tensor<int16_t> &input)
     // std::cout << "After l36 (Add2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
 //CHange
-    this->l37.build(input);
-    shape = this->l37.get_output().shape;
-    std::cout << "After l37 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
-
-    this->l38.build(this->l37.get_output());
+    this->l38.build(input);
     shape = this->l38.get_output().shape;
-    std::cout << "After l38 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+    std::cout << "After l38 (Conv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
+
+    // this->l38.build(this->l37.get_output());
+    // shape = this->l38.get_output().shape;
+    // std::cout << "After l38 (DepthwiseConv2D): (" << shape[0] << ", " << shape[1] << ", " << shape[2] << ", " << shape[3] << ")\n";
 
     this->l39.build(this->l38.get_output());
     shape = this->l39.get_output().shape;
@@ -509,7 +509,7 @@ void build(Tensor<int16_t> &input)
  */
 void call(Tensor<int16_t> &input)
 {
-    this->l37.call(input);
+    this->l38.call(input);
     input.free_element();
 
     // this->l2.call(this->l1.get_output());
@@ -620,8 +620,8 @@ void call(Tensor<int16_t> &input)
     // this->l37.call(this->l36.get_output());
     // this->l36.get_output().free_element(); //change 
 
-    this->l38.call(this->l37.get_output());
-    this->l37.get_output().free_element();
+    // this->l38.call(this->l37.get_output());
+    // this->l37.get_output().free_element();
 
     this->l39.call(this->l38.get_output());
     this->l38.get_output().free_element();

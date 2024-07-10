@@ -19,7 +19,7 @@
 #include "../model/mnist_model.hpp"
 
 // UART Variables
-static const int RX_BUF_SIZE = 1024;
+static const int RX_BUF_SIZE = 516;
 #define TXD_PIN (GPIO_NUM_21)
 #define RXD_PIN (GPIO_NUM_47)
 #define SIGNAL_PIN GPIO_NUM_4
@@ -31,8 +31,8 @@ using namespace std::chrono;
 std::map<int, steady_clock::time_point> timers;
 int timer_id_counter = 0; // Global counter for generating unique IDs
 
-#define serverName "BLE SERVER 1"
-#define connectTo "BLE SERVER 2"
+#define serverName "BLE SERVER 2"
+#define connectTo "BLE SERVER 3"
 
 extern "C"
 {
@@ -58,6 +58,8 @@ BLECharacteristic *pCharacteristic = nullptr;
 std::vector<uint16_t> values;
 int16_t *nums_to_send;
 int sizeOfTensor;
+bool done = false;
+bool sentData = false;
 
 void configure_gpio() 
 {
@@ -95,7 +97,75 @@ int sendData(const char* logName, const char* data)
     return txBytes;
 }
 
-__attribute__((aligned(16))) int16_t example_element[] = {};
+// Send client data to server
+void sendDataChunks(int16_t *intermediates, size_t num_values)
+{
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    printf("Starting to send data\n");
+    sendData("UART", "Starting to send data");
+    size_t chunk_size = (NimBLEDevice::getMTU() - 3 - sizeof(int64_t)) / 2; // Adjust based on actual MTU size
+
+    size_t before_send_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
+    printf("Free heap memory before sending: %d bytes\n", before_send_free_heap);
+
+    timer_id_counter = 0;
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    //Set to low
+    gpio_set_level(SIGNAL_PIN, 0);      
+    printf("GPIO SET LEVEL BACK TO 0\n");
+    // vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
+    printf("GPIO SET LEVEL BACK TO 1\n");
+    gpio_set_level(SIGNAL_PIN, 1);
+
+    for (size_t i = 0; i < num_values; i += chunk_size)
+    {
+        vTaskDelay(80 / portTICK_PERIOD_MS);
+        size_t remaining = num_values - i;
+        size_t this_chunk_size = remaining < chunk_size ? remaining : chunk_size;
+
+        uint8_t values[this_chunk_size * 2 + sizeof(int)]; // Include space for the timer ID
+        int timer_id = timer_id_counter++;
+
+        // Copy the timer ID to the beginning of the data
+        memcpy(values, &timer_id, sizeof(timer_id));
+
+        for (size_t j = 0; j < this_chunk_size; j++)
+        {
+            values[sizeof(timer_id) + j * 2] = intermediates[i + j] & 0xFF;
+            values[sizeof(timer_id) + j * 2 + 1] = (intermediates[i + j] >> 8) & 0xFF;
+        }
+
+        // Start timer for this chunk
+        timers[timer_id] = steady_clock::now();
+
+        bool success = pRemoteCharacteristic->writeValue(values, sizeof(values), false);
+        printf("Sent data\n");
+        sendData("UART", "Sent data");
+        if (!success)
+        {
+            printf("Failed to write characteristic\n");
+            return;
+        }
+    }
+
+    const char *buf = "TRAIN";
+    pRemoteCharacteristic->writeValue((uint8_t *)buf, strlen(buf), false);
+    printf("Sent TRAIN\n");
+    sendData("UART", "Sent TRAIN");
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time to send: " << duration.count() << " ms" << std::endl;
+    
+    size_t after_send_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
+    printf("Free heap memory after sending: %d bytes\n", after_send_free_heap);
+
+    size_t memory_used_for_sending = before_send_free_heap - after_send_free_heap;
+    printf("Memory used for sending: %d bytes\n", memory_used_for_sending);
+
+    printf("Sent this many bytes: %zu\n", sizeOfTensor);
+}
 
 // onWrite callbacks
 class MyCallbacks : public NimBLECharacteristicCallbacks
@@ -109,7 +179,7 @@ public:
   {
     printf("Got Data\n");
     sendData("UART", "Got Data");
-    pCharacteristic->notify();
+    //pCharacteristic->notify();
     size_t before_receive_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
     printf("Free heap memory before receiving: %d bytes\n", before_receive_free_heap);
 
@@ -144,12 +214,6 @@ public:
       printf("GPIO SET LEVEL BACK TO 1\n");
       gpio_set_level(SIGNAL_PIN, 0);
 
-      for (const auto &val : values)
-      {
-        printf("%d ", val);
-      }
-      printf("\n");
-
       auto start_time = std::chrono::high_resolution_clock::now();
 
       // PARTITION 2
@@ -159,7 +223,7 @@ public:
       int input_exponent = -11;
       int16_t *model_input = (int16_t *)dl::tool::malloc_aligned_prefer(input_height*input_width*input_channel, sizeof(int16_t *));
       for(int i=0 ;i<input_height*input_width*input_channel; i++){
-          float normalized_input = example_element[i];
+          float normalized_input = values[i];
           model_input[i] = (int16_t)DL_CLIP(normalized_input * (1 << -input_exponent), -32768, 32767);
       } 
 
@@ -173,37 +237,21 @@ public:
       // model forward
       latency.start();
       
+      //model.build(input);
       model.forward(input);
-      // model.build(input);
-      Tensor<int16_t> &my_tensor = model.l36.get_output();
-      auto sizeOfTensor = my_tensor.get_size();
-      // my_tensor.print_all();
-      auto nums_to_send = my_tensor.all_list();
+      Tensor<int16_t> &my_tensor = model.l37.get_output();
+      sizeOfTensor = my_tensor.get_size();
+  
+      nums_to_send = my_tensor.all_list();
       latency.end();
       latency.print("MNIST", "forward");
-
-      // // parse
-      // int16_t *score = model.l4.get_output().get_element_ptr();
-      // int16_t max_score = score[0];
-      // int max_index = 0;
-      // printf("%d, ", max_score);
-
-      // for (size_t i = 1; i < 10; i++)
-      // {
-      //   printf("%d, ", score[i]);
-      //   if (score[i] > max_score)
-      //   {
-      //     max_score = score[i];
-      //     max_index = i;
-      //   }
-      // }
-      // printf("\nPrediction Result: %d\n", max_index);
 
       auto end_time = std::chrono::high_resolution_clock::now();
       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
       std::cout << "TRAIN time: " << duration.count() << " ms" << std::endl;
 
-      values.clear();
+      done = true;
+      free(model_input);
     }
 
     size_t after_receive_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
@@ -365,66 +413,6 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks
   }
 };
 
-// Send client data to server
-void sendDataChunks(int16_t *intermediates, size_t num_values)
-{
-    printf("Starting to send data\n");
-    sendData("UART", "Starting to send data");
-    size_t chunk_size = (NimBLEDevice::getMTU() - 3 - sizeof(int64_t)) / 2; // Adjust based on actual MTU size
-
-    size_t before_send_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
-    printf("Free heap memory before sending: %d bytes\n", before_send_free_heap);
-
-    timer_id_counter = 0;
-    for (size_t i = 0; i < num_values; i += chunk_size)
-    {
-        size_t remaining = num_values - i;
-        size_t this_chunk_size = remaining < chunk_size ? remaining : chunk_size;
-
-        uint8_t values[this_chunk_size * 2 + sizeof(int)]; // Include space for the timer ID
-        int timer_id = timer_id_counter++;
-
-        // Copy the timer ID to the beginning of the data
-        memcpy(values, &timer_id, sizeof(timer_id));
-
-        for (size_t j = 0; j < this_chunk_size; j++)
-        {
-            values[sizeof(timer_id) + j * 2] = intermediates[i + j] & 0xFF;
-            values[sizeof(timer_id) + j * 2 + 1] = (intermediates[i + j] >> 8) & 0xFF;
-        }
-
-        // Start timer for this chunk
-        timers[timer_id] = steady_clock::now();
-
-        bool success = pRemoteCharacteristic->writeValue(values, sizeof(values), false);
-        printf("Sent data\n");
-        sendData("UART", "Sent data");
-        if (!success)
-        {
-            printf("Failed to write characteristic\n");
-            return;
-        }
-    }
-
-    const char *buf = "TRAIN";
-    pRemoteCharacteristic->writeValue((uint8_t *)buf, strlen(buf), false);
-    printf("Sent TRAIN\n");
-    sendData("UART", "Sent TRAIN");
-
-    //Set to low
-    gpio_set_level(SIGNAL_PIN, 0);      
-    printf("GPIO SET LEVEL BACK TO 0\n");
-    // vTaskDelay(10 / portTICK_PERIOD_MS); // TODO Unsure if this 25 milliseconds is too small
-    printf("GPIO SET LEVEL BACK TO 1\n");
-    gpio_set_level(SIGNAL_PIN, 1);
-
-    size_t after_send_free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
-    printf("Free heap memory after sending: %d bytes\n", after_send_free_heap);
-
-    size_t memory_used_for_sending = before_send_free_heap - after_send_free_heap;
-    printf("Memory used for sending: %d bytes\n", memory_used_for_sending);
-}
-
 // Connect to server
 void connectTask(void *parameter)
 {
@@ -436,7 +424,6 @@ void connectTask(void *parameter)
       {
         printf("We are now connected to the BLE Server.\n");
         // Send the data in chunks
-        sendDataChunks(nums_to_send, sizeOfTensor);
       }
       else
       {
@@ -449,7 +436,12 @@ void connectTask(void *parameter)
     // with the current time since boot.
     if (connected)
     {
-      //Loop
+      if(done)
+        {
+          done = false;
+          vTaskDelay(2000 / portTICK_PERIOD_MS);
+          sendDataChunks(nums_to_send, sizeOfTensor);
+        }
     }
     else if (doScan)
     {
@@ -491,7 +483,7 @@ void serverSetUp(void)
   printf("Server Start\n");
   sendData("UART", "Server Start");
   auto start_time = std::chrono::high_resolution_clock::now();
-  BLEDevice::init("serverName");
+  BLEDevice::init(serverName);
   BLEDevice::setMTU(SIZEOFMTU);
   pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
@@ -527,7 +519,7 @@ void app_main(void)
 
   // CONFIGURE SIGNAL PIN
   configure_gpio();
-  gpio_set_level(SIGNAL_PIN, 1); // Initial starting thing
+  gpio_set_level(SIGNAL_PIN, 1);
 
   // SERVER
   serverSetUp();
