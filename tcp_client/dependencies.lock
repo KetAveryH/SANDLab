@@ -1,0 +1,15 @@
+dependencies:
+  idf:
+    component_hash: null
+    source:
+      type: idf
+    version: 5.2.1
+  protocol_examples_common:
+    component_hash: null
+    source:
+      path: C:\Users\holli\esp\v5.2.1\esp-idf\examples\common_components\protocol_examples_common
+      type: local
+    version: '*'
+manifest_hash: 223340ad5b0257f592e8ff467a651f65c45c9d349bd79fa8aac30efcea08c322
+target: esp32s3
+version: 1.0.0
